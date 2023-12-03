@@ -19,15 +19,119 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { RiContactsLine } from "react-icons/ri";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
+import { MyContext } from "../../Utils/MyContext";
+import { arr } from "../NavMenuArray";
 import "./Navbar.css";
 
 const style = {
-  border: "1px solid var(--color-border)",
+  border: "1px solid #343536",
   borderRadius: " 3px",
   cursor: "pointer",
 };
+
+const Option = () => {
+  const {
+    login,
+    setLogin,
+    setShowForm,
+    theme,
+    setTheme,
+    setNavMenu,
+    userId,
+    setUserId,
+  } = useContext(MyContext);
+  const navigate = useNavigate();
+
+ 
+  return (
+    <div className="reddit_clone-nav_option">
+      {/* <button
+        onClick={() => {
+          navigate("/profile");
+        }}
+      >
+        <CgProfile /> Profile
+      </button> */}
+
+      <button
+        onClick={() => {
+          navigate("/coins");
+          setNavMenu(arr[7]);
+        }}
+      >
+        <CiCoinInsert className="reddit_clone-nav_menu_icons" /> Coins
+      </button>
+      <button
+        onClick={() => {
+          navigate("/premium");
+          setNavMenu(arr[8]);
+        }}
+      >
+        <BsShield className="reddit_clone-nav_menu_icons" /> Premium
+      </button>
+      <button onClick={() => navigate("/comingpage")}>
+        <BsQuestionLg /> Help Center
+      </button>
+      <button onClick={() => navigate("/comingpage")}>
+        <CiCircleMore /> More
+      </button>
+      <button onClick={() => navigate("/comingpage")}>
+        <FiFileText /> Terms And Policies
+      </button>
+      <button onClick={() => navigate("/comingpage")}>
+        <FcAdvertising /> Advertise on Reddit
+      </button>
+      <button >
+        <CgLogIn /> LogIn & LogOut
+      </button>
+    </div>
+  );
+};
 const Navbar = () => {
-    const navigate = useNavigate();
+  const [option, setOption] = useState(false);
+  const navigate = useNavigate();
+  const [navMenuWidth, setNavMenuWidth] = useState();
+  const [showMenu, setShowMenu] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth > 1200);
+  const [border, setBorder] = useState();
+
+  const {
+    login,
+    setShowForm,
+    theme,
+    setTheme,
+    userName,
+    setIsAllPage,
+    menu,
+    setMenu,
+    navMenu,
+    setNavMenu,
+    setNewPost,
+    setQr,
+    apiPosts,
+    setApiPosts,
+    update,
+    filterPost,
+    setFilterPost,
+    search,
+    setSearch,
+    pseudoPost,
+  } = useContext(MyContext);
+  const optionRef = useRef();
+  useEffect(() => {
+   
+    const handleClickOutside = (e) => {
+      if (optionRef.current && !optionRef.current.contains(e.target)) {
+        setOption(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+     
+    };
+  }, []);
+
 
   const handleGetAppClick = () => {
    navigate("/redditqr");
@@ -77,9 +181,13 @@ const Navbar = () => {
             <button className="reddit_clone-nav_login" onClick={handleLogin}>
               <BiLogIn /> Login
             </button>
-            <div className="reddit_Clone-nav_before_login">
+            <div className="reddit_Clone-nav_before_login"
+             onClick={() => setOption((p) => !p)}
+              ref={optionRef}
+            >
               <HiDotsHorizontal className="reddit_clone-contact_icon" />
               {/* <BsChevronDown /> */}
+              {option && <Option />}
             </div>
           </div>
         </div>

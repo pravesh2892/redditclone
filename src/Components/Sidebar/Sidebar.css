@@ -7,7 +7,7 @@
     color: #0F1A1C;
     z-index: 100;
     position: fixed;
-    max-height: 70vh;
+    height: 100vh;
     overflow: auto;
     border: 1px solid #00000033;
     border-top: none;
