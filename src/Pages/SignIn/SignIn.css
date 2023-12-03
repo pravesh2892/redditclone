@@ -1,0 +1,103 @@
+.reddit_clone-login {
+    width: 40vw;
+    text-align: center;
+    background-color:  white;
+    border-radius: 1.5rem;
+    /* padding: 1rem; */
+    margin-left: 370px;
+    position: absolute;
+    pointer-events: all;
+    z-index: 400;
+    border: 1px solid black;
+  }
+  
+  .reddit_clone-login_close button {
+    margin-top: 14px;
+    margin-left: 419px;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    background-color: #d8dbd8;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    color: white;
+  }
+  
+  .reddit_clone-login_container {
+    padding: 3rem 2rem;
+  }
+  .reddit_clone-login_container button,
+  .reddit_clone-login_container input {
+    border: none;
+    background-color: #d7dadc;
+    font-family:"Signika Negative", sans-serif;
+    color:  #0c0c0c;
+  }
+  .reddit_clone-login a {
+    color: #0079ff;
+    font-family: "Signika Negative", sans-serif;
+  }
+  .reddit_clone-login_heading h3 {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    text-align: start;
+    margin-left: 80px;
+    font-family: "Signika Negative", sans-serif;
+    color:  #0c0c0c;
+  }
+  .reddit_clone-login_heading p{
+    margin-left: 65px;
+    margin-right: 50px;
+  }
+  .reddit_clone-login_heading a {
+    text-decoration: none;
+  }
+  .reddit_clone-login p {
+    font-size: 0.9rem;
+    font-family:"Signika Negative", sans-serif;
+    color: #0c0c0c;
+  }
+  .reddit_clone-login_shortcut {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Signika Negative", sans-serif;
+    /* margin: 1rem; */
+  }
+  .reddit_clone-login_shortcut button {
+    margin: 0.5rem 0;
+    padding: 0.6rem;
+    width: 70%;
+    font-size: 1rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    color: #0c0c0c;
+    border: 1px solid #343536;
+  }
+  .reddit_clone-login_input input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0.8rem;
+    margin: 1rem 4.2rem;
+    border-radius: 1.5rem;
+    width: 70%;
+    font-family: "Signika Negative", sans-serif;
+    color:  #0c0c0c;
+    border: 1px solid #343536;
+  }
+  .reddit_clone-login_input button {
+    padding: 0.8rem;
+    margin: 1rem 0;
+    border-radius: 1.5rem;
+    width: 70%;
+    cursor: pointer;
+    background-color:orangered;
+    font-weight: bold;
+    color:white;
+    font-family: "Signika Negative", sans-serif;
+  }
+
+ 

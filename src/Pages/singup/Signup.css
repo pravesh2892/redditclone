@@ -1,0 +1,99 @@
+.reddit_clone-signup {
+    width: 40vw;
+    text-align: center;
+    background-color: white;
+    border-radius: 1.5rem;
+    padding: 1rem;
+    position: absolute;
+    margin-left: 370px;
+    pointer-events: all;
+    font-family: "Signika Negative", sans-serif;
+    color: #0c0c0c;
+    border: 1px solid #343536;
+  }
+ 
+  .reddit_clone-signup_close {
+    align-items: end;
+    text-align: end;
+  }
+  .reddit_clone-signup_close button {
+    margin: 0;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    background-color:rgb(184, 181, 181);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-family:"Signika Negative", sans-serif;
+    color: #0c0c0c;
+  }
+  
+  .reddit_clone-signup_container {
+    padding: 3rem 2rem;
+  }
+  .reddit_clone-signup_container button,
+  .reddit_clone-signup_container input {
+    border: none;
+    background-color: #d7dadc;
+    font-family: "Signika Negative", sans-serif;
+    color: #0c0c0c;
+    border: 1px solid #343536;
+  }
+  .reddit_clone-signup a{
+     color: #0079ff;
+  }
+  .reddit_clone-signup_heading h3 {
+    text-align: start;
+    font-family: "Signika Negative", sans-serif;
+    margin-left: 70px;
+  }
+  .reddit_clone-signup_heading p{
+    margin-left: 55px ;
+    margin-right: 30px;
+  }
+  .reddit_clone-signup_heading a {
+    text-decoration: none;
+    font-family:"Signika Negative", sans-serif;
+  }
+  .reddit_clone-signup p {
+    font-size: 0.9rem;
+    font-family: "Signika Negative", sans-serif;
+  }
+  .reddit_clone-signup_shortcut {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    /* margin: 1rem; */
+  }
+  .reddit_clone-signup_shortcut button {
+    margin: 0.5rem 0;
+    padding: 0.8rem;
+    width: 70%;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    font-family: "Signika Negative", sans-serif;
+  }
+  .reddit_clone-signup_input input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 65px;
+    padding: 0.8rem;
+    
+    border-radius: 1.5rem;
+    width: 70%;
+    font-family: "Signika Negative", sans-serif;
+  }
+  .reddit_clone-signup_input button {
+    padding: 0.8rem;
+    margin: 1rem 0;
+    border-radius: 1.5rem;
+    width: 70%;
+    cursor: pointer;
+    background-color: orangered;
+    font-weight: bold;
+    color: white;
+    font-family: "Signika Negative", sans-serif;
+  }
