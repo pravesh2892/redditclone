@@ -149,7 +149,7 @@ const Rightbar = () => {
       <div className="reddit_clone-right_section">
         <RightSectionPremium />
         <RightSectionCommunity />
-        {/* {showDiv && !isPopularPage ? false : <RightSectionFooter />} */}
+        <RightSectionFooter />
       </div>
     </>
   );
