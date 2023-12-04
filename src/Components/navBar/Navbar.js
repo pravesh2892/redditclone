@@ -45,13 +45,13 @@ const Option = () => {
  
   return (
     <div className="reddit_clone-nav_option">
-      {/* <button
-        onClick={() => {
-          navigate("/profile");
-        }}
+      <button
+        // onClick={() => {
+        //   navigate("/profile");
+        // }}
       >
         <CgProfile /> Profile
-      </button> */}
+      </button>
 
       <button
         onClick={() => {
@@ -81,7 +81,7 @@ const Option = () => {
       <button onClick={() => navigate("/comingpage")}>
         <FcAdvertising /> Advertise on Reddit
       </button>
-      <button >
+      <button onClick={()=>navigate("/signin")}>
         <CgLogIn /> LogIn & LogOut
       </button>
     </div>

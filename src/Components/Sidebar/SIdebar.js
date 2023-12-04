@@ -36,11 +36,11 @@ const Sidebar = () => {
         <p style={{ fontSize: "0.8rem" }}>FEEDS</p>
         <button
           id="1"
-        //   onClick={() => {
-        //     setNewPost(false);
-        //     navigate("/");
-        //     setIsPopularPage(false);
-        //   }}
+          onClick={() => {
+           
+            navigate("/");
+           
+          }}
         >
           {" "}
           <AiFillHome className="reddit_clone-nav_menu_icons" /> Home
@@ -89,10 +89,10 @@ const Sidebar = () => {
         >
           <AiOutlinePlus className="reddit_clone-nav_menu_icons" /> Create Post
         </button>
-        <button id="7" >
+        {/* <button id="7" >
           <IoIosNotificationsOutline className="reddit_clone-nav_menu_icons" />{" "}
           Notifications
-        </button>
+        </button> */}
         <button id="8"  onClick={() => navigate("/coins")}>
           <CiCoinInsert className="reddit_clone-nav_menu_icons" /> Coins
         </button>

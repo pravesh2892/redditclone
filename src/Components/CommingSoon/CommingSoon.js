@@ -1,4 +1,5 @@
 import React from 'react'
+import not from '../../Assets/not.gif'
 
 function CommingSoon() {
     return (
@@ -13,9 +14,9 @@ function CommingSoon() {
               color:"#0F1A1C"
             }}
           >
-             <img src="https://media.tenor.com/CeDk6XdCgOUAAAAi/develop-web.gif" style={{width:"40%"}}  />
-            <h2 style={{marginTop:"20px"}}>We are working on something amazing.</h2>
-            <h2 style={{ marginTop: "10px" , marginLeft:"85px"}}>Till then stay tuned</h2>
+             <img src={not} style={{width:"40%"}}  />
+            <h2 style={{marginTop:"20px", marginLeft:"-45px"}}>We are working on something amazing.</h2>
+            <h2 style={{ marginTop: "10px" , marginLeft:"70px"}}>Till then stay tuned</h2>
            
           </div>
         </div>
