@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineMessage, AiOutlinePlus } from "react-icons/ai";
 import { BiLogIn } from "react-icons/bi";
+import { CiSearch } from "react-icons/ci";
 import {
   BsArrowBarLeft,
   BsArrowUpRightCircle,
@@ -42,13 +43,12 @@ const Option = () => {
   } = useContext(MyContext);
   const navigate = useNavigate();
 
- 
   return (
     <div className="reddit_clone-nav_option">
       <button
-        // onClick={() => {
-        //   navigate("/profile");
-        // }}
+      // onClick={() => {
+      //   navigate("/profile");
+      // }}
       >
         <CgProfile /> Profile
       </button>
@@ -81,7 +81,7 @@ const Option = () => {
       <button onClick={() => navigate("/comingpage")}>
         <FcAdvertising /> Advertise on Reddit
       </button>
-      <button onClick={()=>navigate("/signin")}>
+      <button onClick={() => navigate("/signin")}>
         <CgLogIn /> LogIn & LogOut
       </button>
     </div>
@@ -119,7 +119,6 @@ const Navbar = () => {
   } = useContext(MyContext);
   const optionRef = useRef();
   useEffect(() => {
-   
     const handleClickOutside = (e) => {
       if (optionRef.current && !optionRef.current.contains(e.target)) {
         setOption(false);
@@ -128,18 +127,16 @@ const Navbar = () => {
     document.addEventListener("click", handleClickOutside);
     return () => {
       document.removeEventListener("click", handleClickOutside);
-     
     };
   }, []);
 
-
   const handleGetAppClick = () => {
-   navigate("/redditqr");
+    navigate("/redditqr");
   };
 
-  const handleLogin =()=>{
-    navigate("/signin")
-  }
+  const handleLogin = () => {
+    navigate("/signin");
+  };
 
   return (
     <>
@@ -170,19 +167,25 @@ const Navbar = () => {
           </div>
           <div className="reddit_clone-nav_input">
             <div className="reddit_clone-nav_input_item">
+           
               <input type="text" placeholder="🔍 Search Reddit" />
+             
             </div>
           </div>
 
           <div className="reddit_clone-nav_login_part">
-            <button className="reddit_clone-nav_getapp" onClick={handleGetAppClick}>
+            <button
+              className="reddit_clone-nav_getapp"
+              onClick={handleGetAppClick}
+            >
               <BsQrCodeScan /> Get App
             </button>
             <button className="reddit_clone-nav_login" onClick={handleLogin}>
               <BiLogIn /> Login
             </button>
-            <div className="reddit_Clone-nav_before_login"
-             onClick={() => setOption((p) => !p)}
+            <div
+              className="reddit_Clone-nav_before_login"
+              onClick={() => setOption((p) => !p)}
               ref={optionRef}
             >
               <HiDotsHorizontal className="reddit_clone-contact_icon" />

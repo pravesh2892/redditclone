@@ -28,6 +28,7 @@ function App() {
     <Route path="/premium" element={<Premium />} />
     <Route path="/comingpage" element ={<CommingSoon />} />
     <Route path="/coins" element={<Coins />} />
+    
    </Routes>
    </Router>
  
