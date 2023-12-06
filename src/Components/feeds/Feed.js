@@ -57,7 +57,9 @@ const Feed = ({ fed }) => {
        
           <div className="user">
           <div className="vote-like">
+          <div className="action-item" onClick={() => likeHandle(fed?._id)}>
             <ImArrowUp className="reddit_clone-arrow_up"/>
+            </div>
             {fed?.likeCount}
             <ImArrowDown  className="reddit_clone-arrow_down"/>
           </div>
@@ -74,9 +76,7 @@ const Feed = ({ fed }) => {
         <img src={fed?.channel?.image} alt="" />
       </div>
       <div className="bottom-content">
-        <div className="action-item" onClick={() => likeHandle(fed?._id)}>
-         
-        </div>
+        
         <div className="action-item" >
           <span>
             <FontAwesomeIcon icon={faComment} /> {fed?.commentCount} Comment

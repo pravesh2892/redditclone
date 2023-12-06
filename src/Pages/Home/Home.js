@@ -10,9 +10,9 @@ function Home() {
       <div className="reddit_clone-app_right_section">
             <Rightbar  />
             </div>
-            {/* <div className="reddit_clone-app_add_post">
+            <div className="reddit_clone-app_add_post">
             <Stick />
-            </div> */}
+            </div>
             <Feeds />
          
     </div>
