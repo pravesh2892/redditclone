@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { BsShield } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import "./Rightbar.css";
+// import { arr } from "../NavMenuArray";
 
 const RightSectionPremium = () => {
-//   const navigate = useNavigate();
-//   const { setNavMenu } = useContext();
+  const navigate = useNavigate();
+  //  const { setNavMenu } = useContext();
   return (
     <section className="reddit_clone-right_section_premium">
       <div className="reddit_clone-right_section_premium_heading">
@@ -16,10 +17,10 @@ const RightSectionPremium = () => {
         </div>
       </div>
       <button
-        // onClick={() => {
-        //   navigate("/premium");
-        //   setNavMenu(arr[8]);
-        // }}
+        onClick={() => {
+          navigate("/premium");
+          // setNavMenu(arr[8]);
+        }}
       >
         Try Now
       </button>
