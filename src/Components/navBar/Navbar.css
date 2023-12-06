@@ -87,7 +87,7 @@
     width: 2.5rem;
     font-size: 1.5rem;
     overflow: hidden;
-    background-color:  #1b1c1b;
+    background-color:  #fdfbfb;
     cursor: pointer;
   }
   
@@ -95,7 +95,7 @@
     font-size: 1rem;
     overflow: visible;
     width: 7rem;
-    background-color: #343536;
+    background-color: #f0f0f0;
     border-radius: 1rem;
     padding: 0.2rem;
     font-family: var(--font-c);
@@ -133,7 +133,7 @@
     height: 2rem;
     cursor: pointer;
     border: none;
-    background-color: var(--color-bg);
+    background-color:white;
   }
   .reddit_clone-mid_icons button:nth-of-type(2) {
     font-size: 2rem;
@@ -168,7 +168,7 @@
     /* width: 15rem; */
     padding: 1rem 0.5rem;
     border-radius: 5px;
-    border: 1px solid  #1b1c1b;
+    /* border: 1px solid  #1b1c1b; */
   }
   .reddit_clone-nav_username:hover {
     border: 1px solid #343536;
@@ -182,7 +182,7 @@
     gap: 0.5rem;
   }
   .reddit_clone-nav_username_userphoto {
-    background-color: #343536;
+    color: #343536;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -203,7 +203,7 @@
     font-weight: bold;
   }
   .reddit_clone-nav_username_user p:nth-of-type(2) {
-    color: var(--color-text-light);
+    color: #343536;;
     font-family:  "Signika Negative", sans-serif;
     font-weight: 400;
   }

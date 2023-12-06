@@ -7,6 +7,7 @@
     margin-left: 370px;
     position: absolute;
     pointer-events: all;
+    margin-top: 50px;
     z-index: 400;
     border: 1px solid black;
   }
@@ -75,20 +76,21 @@
     color: #0c0c0c;
     border: 1px solid #343536;
   }
-  .reddit_clone-login_input input {
+  .reddit_clone-login_input  {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0.8rem;
+    /* padding: 0.8rem; */
     margin: 1rem 4.2rem;
-    border-radius: 1.5rem;
-    width: 70%;
+    /* border-radius: 1.5rem;
+    width: 70%; */
     font-family: "Signika Negative", sans-serif;
     color:  #0c0c0c;
-    border: 1px solid #343536;
+    /* border: 1px solid #343536; */
+    
   }
-  .reddit_clone-login_input button {
+  .reddit_clone-login_input .login-button {
     padding: 0.8rem;
     margin: 1rem 0;
     border-radius: 1.5rem;

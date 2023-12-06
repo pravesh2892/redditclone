@@ -1,18 +1,86 @@
-
 import React, { useContext, useEffect, useState } from "react";
-import { FaApple } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-
+import { Alert } from "react-bootstrap";
+import { TextField, Button, IconButton } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { MyContext } from "../../Utils/MyContext";
 import "./SignIn.css";
 
-
 const SignIn = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const {
+    setLogin,
+    setUserName,
+    setUserPhoto,
+    setUserId,
+    message,
+    setMessage,
+  } = useContext(MyContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [user, setUser1] = useState({
+    email: "",
+    password: "",
+  });
+  let name, value;
+  const getUserData = (event) => {
+    name = event.target.name;
+    value = event.target.value;
 
-    const handleClosepage = () => {
-     navigate("/");
-    };
+    setUser1({ ...user, [name]: value });
+  };
+
+  const postData = async (e) => {
+    e.preventDefault();
+    const { email, password } = user;
+
+    if (email && password) {
+      const data = await fetch(
+        "https://academics.newtonschool.co/api/v1/user/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            projectId: "f104bi07c490",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            appType: "reddit",
+          }),
+        }
+      );
+      if (data) {
+        setUser1({
+          email: "",
+          password: "",
+        });
+        let json = await data.json();
+        console.log(json);
+        if (json.status === "fail") {
+          alert(json.message);
+        } else {
+          window.sessionStorage.setItem("jwt", json.token);
+          console.log("JWT Token:", json.token);
+          setLogin(true);
+    
+          alert("Login Succesfully");
+          navigate("/");
+        }
+      }
+    } else {
+      alert("Please fill all the data");
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleClosepage = () => {
+    navigate("/");
+  };
   return (
     <div className="reddit_clone-login">
       <div className="reddit_clone-login_close">
@@ -27,57 +95,60 @@ const SignIn = () => {
             and <a href=""> Privacy Policy.</a>
           </p>
         </div>
-        <div className="reddit_clone-login_shortcut">
-          <button >
-            <FcGoogle style={{ fontSize: "1.2rem" }} />{" "}
-            Continue with Google
-          </button>
-          <button>
-            {" "}
-            <FaApple style={{ fontSize: "1.2rem" }} />{" "}
-            Continue with Apple
-          </button>
-        </div>
-        
-         <hr  style={{width:"70%", marginLeft:"65px"}} />
-      
+
         <p style={{ color: "green" }}>{}</p>
-        <form className="reddit_clone-login_input" >
-          <input
-            type="email"
-            placeholder="Email"
+        <form className="reddit_clone-login_input">
+          {error && <Alert variant="danger">{error}</Alert>}
+          <TextField
+            placeholder="Enter your email"
+            type="text"
             name="email"
-            // onChange={handleChange}
-            required
-            // value={inp.username}
+            fullWidth
+            value={user.email}
+            onChange={getUserData}
+            sx={{
+             
+              marginBottom: 2,
+              borderRadius: '1.5rem',
+            }}
           />
-          {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
-          <input
-            type="password"
-            placeholder="Password"
+          <TextField
+            placeholder="Enter your Password"
             name="password"
-            required
-            // onChange={handleChange}
-            // value={inp.password}
+            type={showPassword ? "text" : "password"}
+            value={user.password}
+            fullWidth
+            onChange={getUserData}
+            sx={{
+             
+              marginBottom: 2,
+              borderRadius: '1.5rem',
+            }}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  onClick={togglePasswordVisibility}
+                  edge="end"
+                  size="small"
+                  style={{ padding: 0 }}
+                >
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+              ),
+            }}
+          
           />
           <p>
-            Forgot your <a href="">username</a> of <a href="">password </a> ?
+            Forgot your <a href="">username</a> or <a href="">password</a>?
           </p>
-          <button>Login</button>
+          <button onClick={postData} className="login-button">
+            Login
+          </button>
         </form>
         <Link to="/signup">
-        <p>
-          New to Reddit?{" "}
-          <a
-            href=""
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   setShowForm("Signup");
-            // }}
-          >
-            signup
-          </a>{" "}
-        </p>
+          <p>
+            New to Reddit? <a href="">signup</a>{" "}
+          </p>
         </Link>
       </div>
     </div>

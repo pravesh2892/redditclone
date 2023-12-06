@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./feeds.css";
 
-
-import axios from "axios";
 import Feed from "./Feed";
 
 const Feeds = () => {

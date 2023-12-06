@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineMessage, AiOutlinePlus } from "react-icons/ai";
 import { BiLogIn } from "react-icons/bi";
 import { CiSearch } from "react-icons/ci";
+import { FaEllipsisVertical } from "react-icons/fa6";
 import {
   BsArrowBarLeft,
   BsArrowUpRightCircle,
@@ -16,10 +17,12 @@ import { FaReddit } from "react-icons/fa";
 import { FcAdvertising } from "react-icons/fc";
 import { FiFileText } from "react-icons/fi";
 import { GiAlienSkull } from "react-icons/gi";
+import { FaUserTie } from "react-icons/fa";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { RiContactsLine } from "react-icons/ri";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
+import { AddAPhoto } from "@mui/icons-material";
 import { MyContext } from "../../Utils/MyContext";
 import { arr } from "../NavMenuArray";
 import "./Navbar.css";
@@ -42,16 +45,31 @@ const Option = () => {
     setUserId,
   } = useContext(MyContext);
   const navigate = useNavigate();
+  const handleLogin = async () => {
+  if (!login) {
+   navigate('/signin')
+    return;
+  }
+  setLogin(false);
+  const obj = {};
+  try {
+    window.sessionStorage.removeItem("jwt");
+    setLogin(false);
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
 
   return (
     <div className="reddit_clone-nav_option">
-      <button
+      {/* <button
       // onClick={() => {
       //   navigate("/profile");
       // }}
       >
         <CgProfile /> Profile
-      </button>
+      </button> */}
 
       <button
         onClick={() => {
@@ -84,6 +102,93 @@ const Option = () => {
       <button onClick={() => navigate("/signin")}>
         <CgLogIn /> LogIn & LogOut
       </button>
+    </div>
+  );
+};
+
+const NavIcon = ({ userName, option, setOption }) => {
+  const navigate = useNavigate();
+  const optionRef = useRef();
+  const { setNavMenu } = useContext(MyContext);
+
+  const { userPhoto, setNewPost } = useContext(MyContext);
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (optionRef.current && !optionRef.current.contains(e.target)) {
+        setOption(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+  const handleOptions = () => {
+    setOption((p) => !p);
+  };
+  return (
+    <div className="reddit_clone-nav_icons">
+      <div className="reddit_clone-nav_icons_item">
+        <button
+          onClick={() => {
+            // navigate("/messages");
+            setNavMenu(arr[4]);
+          }}
+        >
+          <AiOutlineMessage />
+        </button>
+        <button
+          onClick={() => {
+            navigate("/");
+            setNavMenu(arr[5]);
+
+            setNewPost(true);
+          }}
+        >
+          <AiOutlinePlus />{" "}
+        </button>
+        <button
+          onClick={() => {
+            // navigate("/notification");
+            setNavMenu(arr[6]);
+          }}
+        >
+          <IoIosNotificationsOutline />
+        </button>
+
+        <button onClick={() => navigate("/comingpage")}>
+          <FcAdvertising /> <p>Advertise</p>
+        </button>
+      </div>
+      <div
+        className="reddit_clone-nav_username"
+        onClick={handleOptions}
+        ref={optionRef}
+      >
+        <div className="reddit_clone-nav_username_item">
+          <div className="reddit_clone-nav_username_userphoto">
+            {userPhoto ? (
+              <img
+                src={userPhoto}
+                alt=""
+                style={{
+                  maxWidth: "2rem",
+                  maxHeight: "2rem",
+                }}
+              />
+            ) : (
+              <FaUserTie />
+            )}
+          </div>
+          <div className="reddit_clone-nav_username_user">
+            {" "}
+            <p>{userName ? userName : ""}</p>
+            <p>*1 karma</p>
+          </div>
+        </div>
+        <FaEllipsisVertical className="reddit_clone-contact_icon"/>
+        {option && <Option />}
+      </div>
     </div>
   );
 };
@@ -171,13 +276,37 @@ const Navbar = () => {
               <input type="text" placeholder="🔍 Search Reddit" />
              
             </div>
-          </div>
-
+            {login && (
+            <div className="reddit_clone-mid_icons">
+              <button
+                onClick={() => {
+                  // navigate("/popular");
+                  setNavMenu(arr[1]);
+                  setIsAllPage(false);
+                }}
+              >
+                <BsArrowUpRightCircle />{" "}
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/coins");
+                  setNavMenu(arr[7]);
+                }}
+              >
+                <CiCoinInsert />{" "}
+              </button>
+            </div>
+          )}
+        </div>
+        {login ? (
+          <NavIcon userName={userName} option={option} setOption={setOption} />
+        ) : (
           <div className="reddit_clone-nav_login_part">
             <button
               className="reddit_clone-nav_getapp"
               onClick={handleGetAppClick}
             >
+              {" "}
               <BsQrCodeScan /> Get App
             </button>
             <button className="reddit_clone-nav_login" onClick={handleLogin}>
@@ -193,6 +322,7 @@ const Navbar = () => {
               {option && <Option />}
             </div>
           </div>
+        )}
         </div>
       </div>
     </>
