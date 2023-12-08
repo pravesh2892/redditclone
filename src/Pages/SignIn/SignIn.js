@@ -61,7 +61,7 @@ const SignIn = () => {
         if (json.status === "fail") {
           alert(json.message);
         } else {
-          window.sessionStorage.setItem("jwt", json.token);
+          window.localStorage.setItem("jwt", json.token);
           console.log("JWT Token:", json.token);
           setLogin(true);
     

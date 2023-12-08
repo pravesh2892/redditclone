@@ -11,13 +11,7 @@ const Comments = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState();
 
-  const getCurrentTime = () => {
-    const currentTime = new Date();
-    return currentTime.toLocaleTimeString([], {
-      hour: "numeric",
-      minute: "2-digit",
-    });
-  };
+ 
 
   var key = "content";
 
@@ -26,7 +20,7 @@ const Comments = ({ postId }) => {
   obj[key] = commentText;
 
   useEffect(() => {
-    const token = window.sessionStorage.getItem("jwt");
+    const token = window.localStorage.getItem("jwt");
     const fetchComments = async () => {
       try {
         const response = await fetch(
@@ -42,14 +36,18 @@ const Comments = ({ postId }) => {
         );
         const res = await response.json();
         if (res.status === "success") {
-          setComments(res.data);
+          const commentsWithTime = res.data.map(comment => ({
+            ...comment,
+            time: comment.createdAt 
+          }));
+          setComments(commentsWithTime);
         }
       } catch (error) {
-        console.error("Error :", error);
+        console.error("Error fetching comments: ", error);
       }
     };
     fetchComments();
-  }, [postId, comments]);
+  }, [postId]);
 
   const commentSend = () => {
     const token = window.sessionStorage.getItem("jwt");
@@ -91,7 +89,7 @@ const Comments = ({ postId }) => {
   };
 
   const deleteComment = async (commentId) => {
-    const token = window.sessionStorage.getItem("jwt");
+    const token = window.localStorage.getItem("jwt");
   
     try {
       const response = await fetch(
@@ -174,11 +172,15 @@ const Comments = ({ postId }) => {
             <h5>{comment.name}</h5>
             <p>{comment.content}</p>
           </div>
-          <small>{getCurrentTime()}</small>
+          <small>{new Date(comment.time).toLocaleTimeString([], {
+            hour: "numeric",
+            minute: "2-digit",
+          })}</small>
           <MdDeleteForever 
           className="delete" 
           style={{cursor: "pointer", fontSize: "20px"}}
-          onClick={() => deleteComment(comment.id)}/>
+          onClick={() => deleteComment(comment.id)}
+        />
         </div>
       ))}
     </div>

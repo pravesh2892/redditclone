@@ -54,7 +54,7 @@ const Option = () => {
     setLogin(false);
     const obj = {};
     try {
-      window.sessionStorage.removeItem("jwt");
+      window.localStorage.removeItem("jwt");
       setLogin(false);
     } catch (error) {
       console.log(error);

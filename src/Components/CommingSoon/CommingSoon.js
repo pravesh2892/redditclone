@@ -10,7 +10,7 @@ function CommingSoon() {
               alignItems: "center",
               flexDirection: "column",
               marginLeft:"550px",
-              paddingTop:"60px",
+              paddingTop:"110px",
               color:"#0F1A1C"
             }}
           >
