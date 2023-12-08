@@ -68,7 +68,7 @@ const Comments = ({ postId }) => {
     };
 
     fetch(
-      `https://academics.newtonschool.co/api/v1/reddit/${postId}/comment`,
+      `https://academics.newtonschool.co/api/v1/reddit/comment/${postId}`,
       requestOptions
     )
       .then((response) => {
@@ -127,7 +127,7 @@ const Comments = ({ postId }) => {
   }
 
   return (
-    <div className="comments">
+    <div className="comments" key={postId}>
       <div className="writebox">
         <form action="#">
           <div className="user">
@@ -150,6 +150,7 @@ const Comments = ({ postId }) => {
                 backgroundColor: "orangered",
                 color: "white",
                 borderRadius: "12px",
+                border:"transparent",
               }}
               onClick={(e) => {
                 e.preventDefault();
@@ -176,11 +177,7 @@ const Comments = ({ postId }) => {
             hour: "numeric",
             minute: "2-digit",
           })}</small>
-          <MdDeleteForever 
-          className="delete" 
-          style={{cursor: "pointer", fontSize: "20px"}}
-          onClick={() => deleteComment(comment.id)}
-        />
+         
         </div>
       ))}
     </div>

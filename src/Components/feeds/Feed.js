@@ -38,6 +38,10 @@ const Feed = ({ fed }) => {
   const commentBoxRef = useRef(null);
    
   const handleShare = (e) => {
+    if (!login) {
+      navigate('/signin')
+      return;
+    }
     e.stopPropagation();
     const postLink = `https://academics.newtonschool.co/api/v1/reddit/post/${fed?._id}`;
 
