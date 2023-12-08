@@ -29,7 +29,7 @@ const Comments = ({ postId }) => {
     const fetchComments = async () => {
       try {
         const response = await fetch(
-          `https://academics.newtonschool.co/api/v1/facebook/post/${postId}/comments`,
+          `https://academics.newtonschool.co/api/v1/reddit/post/${postId}/comments`,
           {
             method: "GET",
             headers: {
@@ -69,7 +69,7 @@ const Comments = ({ postId }) => {
     };
 
     fetch(
-      `https://academics.newtonschool.co/api/v1/facebook/comment/${postId}`,
+      `https://academics.newtonschool.co/api/v1/reddit/comment/${postId}`,
       requestOptions
     )
       .then((response) => {
@@ -125,7 +125,7 @@ const Comments = ({ postId }) => {
         </form>
       </div>
       {comments.map((comment) => (
-        <div className="user" key={comment.id}>
+        <div className="user-comment user" key={comment.id}>
           <img
             style={{ width: "5%", height: "5%" }}
             src="https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png"

@@ -3,6 +3,7 @@ import "./feeds.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ImArrowDown, ImArrowUp } from "react-icons/im";
 import { BsSave } from "react-icons/bs";
+import { GoComment } from "react-icons/go";
 import {
   faComment,
   faListDots,
@@ -139,7 +140,7 @@ const Feed = ({ fed }) => {
         
         <div className="action-item" onClick={commentHandler} >
           <span>
-            <FontAwesomeIcon icon={faComment} /> {fed?.commentCount} Comment
+            <GoComment icon={faComment} /> {fed?.commentCount} Comment
           </span>
         </div>
         <div className="action-item">
