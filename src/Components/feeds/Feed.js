@@ -36,7 +36,29 @@ const Feed = ({ fed }) => {
   const [save, setSave] = useState(false);
   const navigate = useNavigate();
   const commentBoxRef = useRef(null);
-  
+   
+  const handleShare = (e) => {
+    e.stopPropagation();
+    const postLink = `https://academics.newtonschool.co/api/v1/reddit/post/${fed?._id}`;
+
+    navigator.clipboard.writeText(postLink).then(() => {
+      toast.success("Link copied to clipboard", {
+        position: toast.POSITION.TOP_CENTER,
+        progress: undefined,
+      hideProgressBar: false,
+      theme: "light",
+      });
+    }).catch((err) => {
+      console.error('Failed to copy: ', err);
+      toast.error("Failed to copy link to clipboard", {
+        position: toast.POSITION.TOP_CENTER,
+        progress: undefined,
+      hideProgressBar: false,
+      theme: "light",
+      });
+    });
+  };
+
   const handleSave = (e) => {
     e.stopPropagation();
     if (!login) {
@@ -174,7 +196,7 @@ const Feed = ({ fed }) => {
           </span>
         </div>
         <div className="action-item">
-          <span>
+          <span onClick={handleShare}>
             <FontAwesomeIcon icon={faShare} />  Share
           </span>
         </div>
