@@ -11,6 +11,7 @@ import Signup from './Pages/singup/Signup';
 import Premium from './Components/Premium/Premium';
 import CommingSoon from './Components/CommingSoon/CommingSoon';
 import Coins from './Components/Coins/Coins';
+import Message from './Pages/Message/Message';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
     <Route path="/premium" element={<Premium />} />
     <Route path="/comingpage" element ={<CommingSoon />} />
     <Route path="/coins" element={<Coins />} />
-    
+    <Route path="/message" element={<Message />} />
    </Routes>
    </Router>
  

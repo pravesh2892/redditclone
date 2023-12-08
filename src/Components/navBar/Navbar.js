@@ -131,7 +131,7 @@ const NavIcon = ({ userName, option, setOption }) => {
       <div className="reddit_clone-nav_icons_item">
         <button
           onClick={() => {
-            // navigate("/messages");
+            navigate("/message");
             setNavMenu(arr[4]);
           }}
         >

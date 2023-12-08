@@ -178,7 +178,7 @@ const Feed = ({ fed }) => {
           </div>
             <img src={fed?.author?.profileImage} alt="" />
             <div>
-              <h3>{fed?.author?.name}</h3>
+              <h4>{fed?.author?.name}</h4>
             </div>
           </div>
        

@@ -78,9 +78,9 @@ const Sidebar = () => {
         </button>
         <button
           id="5"
-        //   onClick={() => {
-        //     navigate("/messages");
-        //   }}
+          onClick={() => {
+            navigate("/message");
+          }}
         >
           <AiOutlineMessage className="reddit_clone-nav_menu_icons" /> Message
         </button>
