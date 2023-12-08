@@ -8,7 +8,7 @@ import { IoShirtOutline } from "react-icons/io5";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../Utils/MyContext";
-
+import { arr } from "../NavMenuArray";
 const darkModeStyle = {
   backgroundColor: "var(--color-lightDark)",
   color: "white",
@@ -17,21 +17,25 @@ const darkModeStyle = {
 
 const Sidebar = () => {
     const navigate = useNavigate();
-    // const {
-    //   setNewPost,
-    //   setIsAllPage,
-    //   setIsPopularPage,
-    //   setRedditIndex,
-    //   setNavMenu,
-    // } = useContext(MyContext);
+    const {
+      setNewPost,
+    setIsAllPage,
+    setIsPopularPage,
+    menu,
+    setNavMenu,
+    setMenu,
+    setRedditIndex,
+    setFilterPost,
+    setTop,
+    } = useContext(MyContext);
     return (
       <div
         className="reddit_clone-nav_menu_item"
         style={{ width: "16rem" }}
-        // onClick={(e) => {
-        //   const val = arr[parseInt(e.target.id) - 1];
-        //   setNavMenu(val);
-        // }}
+        onClick={(e) => {
+          const val = arr[parseInt(e.target.id) - 1];
+          setNavMenu(val);
+        }}
       >
         <p style={{ fontSize: "0.8rem" }}>FEEDS</p>
         <button
@@ -47,22 +51,22 @@ const Sidebar = () => {
         </button>
         <button
           id="2"
-        //   onClick={() => {
-        //     navigate("/popular");
-        //     setIsAllPage(false);
-        //     setIsPopularPage(true);
-        //   }}
+          onClick={() => {
+            // navigate("/popular");
+            setIsAllPage(false);
+            setIsPopularPage(true);
+          }}
         >
           <BsArrowUpRightCircle className="reddit_clone-nav_menu_icons" /> Popular
         </button>
         <button
           id="3"
-        //   onClick={() => {
-        //     setIsAllPage(true);
-        //     setRedditIndex((p) => p + 1);
+          onClick={() => {
+            setIsAllPage(true);
+            setRedditIndex((p) => p + 1);
   
-        //     navigate("/popular");
-        //   }}
+            // navigate("/popular");
+          }}
         >
           <BsFileBarGraph className="reddit_clone-nav_menu_icons" /> All
         </button>
@@ -82,10 +86,10 @@ const Sidebar = () => {
         </button>
         <button
           id="6"
-        //   onClick={() => {
-        //     setNewPost(true);
-        //     navigate("/");
-        //   }}
+          onClick={() => {
+            setNewPost(true);
+            navigate("/comingpage");
+          }}
         >
           <AiOutlinePlus className="reddit_clone-nav_menu_icons" /> Create Post
         </button>

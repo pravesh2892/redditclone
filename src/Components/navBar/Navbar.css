@@ -18,9 +18,9 @@
     border: none;
     padding: 0.25rem;
     font-size: 1.1rem;
-    background-color:  #1b1c1b;
+    background-color:  white;
     padding: 0.5rem;
-    border: 1px solid  #1b1c1b;
+    /* border: 1px solid  #1b1c1b; */
     /* border: 2px solid red; */
   }
   .reddit-logo{
@@ -36,7 +36,7 @@
     gap: 0.5rem;
     justify-content: space-between;
     border: none;
-    background-color:  #1b1c1b;
+    background-color: white;
     font-size: 1.1rem;
   }
   .reddit_clone-nav {

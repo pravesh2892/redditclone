@@ -18,6 +18,7 @@ import { FcAdvertising } from "react-icons/fc";
 import { FiFileText } from "react-icons/fi";
 import { GiAlienSkull } from "react-icons/gi";
 import { FaUserTie } from "react-icons/fa";
+import NavMenu from "../NavMenu/NavMenu";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { RiContactsLine } from "react-icons/ri";
 import { HiDotsHorizontal } from "react-icons/hi";
@@ -177,7 +178,9 @@ const NavIcon = ({ userName, option, setOption }) => {
                 }}
               />
             ) : (
-              <FaUserTie />
+              <img 
+              style={{height:"25px"}}
+              src="https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png"  alt="userlogo"/>
             )}
           </div>
           <div className="reddit_clone-nav_username_user">
@@ -242,7 +245,16 @@ const Navbar = () => {
   const handleLogin = () => {
     navigate("/signin");
   };
-
+  const handleMouseIn = () => {
+    if (!menu) {
+      setBorder(style);
+    }
+  };
+  const handleLeave = () => {
+    if (border) {
+      setBorder();
+    }
+  };
   return (
     <>
       <div className="reddit_clone-nav_fixed">
@@ -269,7 +281,30 @@ const Navbar = () => {
                 </g>
               </svg>
             </div>
+            <div className="reddit_clone-nav_menu">
+            <button
+              className="reddit_clone-nav_menu_btn"
+              onClick={() => {
+                menu === false ? setShowMenu((p) => !p) : "";
+              }}
+              onMouseEnter={handleMouseIn}
+              onMouseLeave={handleLeave}
+              style={border}
+            >
+              {navMenu ? navMenu : false}{" "}
+              <div>
+                {menu === false && showMenu && windowWidth && (
+                  <BsArrowBarLeft onClick={() => setMenu(true)} />
+                )}
+                {/* <BsChevronDown />{" "} */}
+              </div>
+            </button>
+            {showMenu && (
+              <div>{menu ? <></> : <NavMenu width={navMenuWidth} />}</div>
+            )}
           </div>
+          </div>
+          
           <div className="reddit_clone-nav_input">
             <div className="reddit_clone-nav_input_item">
            
