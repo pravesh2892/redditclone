@@ -69,7 +69,7 @@ const Comments = ({ postId }) => {
     };
 
     fetch(
-      `https://academics.newtonschool.co/api/v1/reddit/comment/${postId}`,
+      `https://academics.newtonschool.co/api/v1/reddit/${postId}/comment`,
       requestOptions
     )
       .then((response) => {
@@ -112,7 +112,7 @@ const Comments = ({ postId }) => {
               style={{
                 backgroundColor: "orangered",
                 color: "white",
-                borderRadius: "8px",
+                borderRadius: "12px",
               }}
               onClick={(e) => {
                 e.preventDefault();
