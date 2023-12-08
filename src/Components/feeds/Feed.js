@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import "./feeds.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ImArrowDown, ImArrowUp } from "react-icons/im";
@@ -33,6 +33,20 @@ const Feed = ({ fed }) => {
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const navigate = useNavigate();
+  const commentBoxRef = useRef(null);
+ 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (commentBoxRef.current && !commentBoxRef.current.contains(event.target)) {
+        setOpenComment(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const commentHandler = (e) => {
     e.stopPropagation();
@@ -154,7 +168,9 @@ const Feed = ({ fed }) => {
           </span>
         </div>
       </div>
+      <div ref={commentBoxRef}>
       {openComment && <Comments fed={fed} postId={fed?._id}/>}
+      </div>
     </div>
   );
 };

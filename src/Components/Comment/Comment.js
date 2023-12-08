@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Comment.css";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { MdDeleteForever } from "react-icons/md";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ImArrowDown, ImArrowUp } from "react-icons/im";
 import { BsSave } from "react-icons/bs";
@@ -89,6 +90,44 @@ const Comments = ({ postId }) => {
       .catch((error) => console.log("error", error));
   };
 
+  const deleteComment = async (commentId) => {
+    const token = window.sessionStorage.getItem("jwt");
+  
+    try {
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/reddit/comment/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            projectID: "f104bi07c490",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      const res = await response.json();
+      if (response.ok) {
+        const updatedComments = comments.filter(
+          (comment) => comment.id !== commentId
+        );
+        setComments(updatedComments);
+        toast.success("Comment deleted successfully", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else {
+        toast.error(res.message || "Failed to delete comment", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting comment: ", error);
+      toast.error("Failed to delete comment", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  }
+
   return (
     <div className="comments">
       <div className="writebox">
@@ -136,6 +175,10 @@ const Comments = ({ postId }) => {
             <p>{comment.content}</p>
           </div>
           <small>{getCurrentTime()}</small>
+          <MdDeleteForever 
+          className="delete" 
+          style={{cursor: "pointer", fontSize: "20px"}}
+          onClick={() => deleteComment(comment.id)}/>
         </div>
       ))}
     </div>

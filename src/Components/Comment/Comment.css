@@ -24,3 +24,8 @@
     background-color:#dae0e6 ;
     padding: 2px 0;
   }
+
+  .user-comment .delete{
+    display: flex;
+    float: right;
+  }
