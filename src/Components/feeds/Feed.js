@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ImArrowDown, ImArrowUp } from "react-icons/im";
 import { BsSave } from "react-icons/bs";
 import { GoComment } from "react-icons/go";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   faComment,
   faListDots,
@@ -12,7 +14,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { MyContext } from "../../Utils/MyContext";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Comments from "../Comment/Comment";
 
 const Feed = ({ fed }) => {
@@ -32,8 +33,23 @@ const Feed = ({ fed }) => {
   ); 
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
+  const [save, setSave] = useState(false);
   const navigate = useNavigate();
   const commentBoxRef = useRef(null);
+  
+  const handleSave = (e) => {
+    e.stopPropagation();
+    if (!login) {
+      navigate('/signin')
+      return;
+    }
+    toast.success("Post saved successful", {
+      position: toast.POSITION.TOP_CENTER,
+      progress: undefined,
+      hideProgressBar: false,
+      theme: "light",
+    });
+  };
  
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -163,16 +179,27 @@ const Feed = ({ fed }) => {
           </span>
         </div>
         <div className="action-item">
-          <span>
-            <BsSave /> Save
+          <span onClick={handleSave}>
+            <BsSave />  Save
           </span>
         </div>
       </div>
       <div ref={commentBoxRef}>
       {openComment && <Comments fed={fed} postId={fed?._id}/>}
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
-
 export default Feed;
