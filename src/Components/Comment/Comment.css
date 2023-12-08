@@ -1,0 +1,26 @@
+.comments {
+    width: 100%;
+    background: rgb(245, 245, 245)0e6;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .comments .writebox {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .comments .writebox input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #343536;;
+    padding: 10px;
+    border-radius: 0.5rem;
+    color: #0c0c0c;
+  }
+  .user{
+    background-color:#dae0e6 ;
+    padding: 2px 0;
+  }

@@ -12,6 +12,7 @@ import {
 import { MyContext } from "../../Utils/MyContext";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Comments from "../Comment/Comment";
 
 const Feed = ({ fed }) => {
   const {
@@ -24,12 +25,24 @@ const Feed = ({ fed }) => {
     userId,
     setUserId,
   } = useContext(MyContext);
+  const [openComment, setOpenComment] = useState(false);
   const [likeCount, setLikeCount] = useState(
     Math.floor(Math.random() * 1000)
   ); 
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const navigate = useNavigate();
+
+  const commentHandler = (e) => {
+    e.stopPropagation();
+    if (!login) {
+      navigate('/signin')
+      return;
+    }
+
+    setOpenComment(!openComment);
+  };
+
   const handleLike = (e) => {
     e.stopPropagation();
     if (!login) {
@@ -39,6 +52,7 @@ const Feed = ({ fed }) => {
     if (!liked) {
       setLikeCount(likeCount + 1); 
       setLiked(true);
+      setDisliked(false);
     }
   };
 
@@ -51,6 +65,7 @@ const Feed = ({ fed }) => {
     if (!disliked  && likeCount > 0) {
       setLikeCount(likeCount - 1); 
       setDisliked(true);
+      setLiked(false);
     }
   };
   // const likeHandle = async (postId) => {
@@ -122,7 +137,7 @@ const Feed = ({ fed }) => {
       </div>
       <div className="bottom-content">
         
-        <div className="action-item" >
+        <div className="action-item" onClick={commentHandler} >
           <span>
             <FontAwesomeIcon icon={faComment} /> {fed?.commentCount} Comment
           </span>
@@ -138,7 +153,7 @@ const Feed = ({ fed }) => {
           </span>
         </div>
       </div>
-      {/* {openComment && <Comments postId={fed?._id} />} */}
+      {openComment && <Comments fed={fed} postId={fed?._id}/>}
     </div>
   );
 };
