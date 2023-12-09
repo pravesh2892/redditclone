@@ -12,6 +12,7 @@ import Premium from './Components/Premium/Premium';
 import CommingSoon from './Components/CommingSoon/CommingSoon';
 import Coins from './Components/Coins/Coins';
 import Message from './Pages/Message/Message';
+import CreatePost from './Components/CreatePost/CreatePost';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
     <Route path="/comingpage" element ={<CommingSoon />} />
     <Route path="/coins" element={<Coins />} />
     <Route path="/message" element={<Message />} />
+    <Route path='/createpost' element={<CreatePost />} />
    </Routes>
    </Router>
  

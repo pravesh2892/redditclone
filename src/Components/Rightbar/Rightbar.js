@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { BsShield } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import "./Rightbar.css";
-// import { arr } from "../NavMenuArray";
+import { arr } from "../NavMenuArray";
+import { MyContext } from "../../Utils/MyContext";
 
 const RightSectionPremium = () => {
   const navigate = useNavigate();
-  //  const { setNavMenu } = useContext();
+  const { setNavMenu } = useContext(MyContext);
   return (
     <section className="reddit_clone-right_section_premium">
       <div className="reddit_clone-right_section_premium_heading">
@@ -19,7 +20,7 @@ const RightSectionPremium = () => {
       <button
         onClick={() => {
           navigate("/premium");
-          // setNavMenu(arr[8]);
+          setNavMenu(arr[8]);
         }}
       >
         Try Now
@@ -28,8 +29,8 @@ const RightSectionPremium = () => {
   );
 };
 const RightSectionCommunity = () => {
-//   const navigate = useNavigate();
-//   const { setNavMenu, setNewPost } = useContext(MyContext);
+  const navigate = useNavigate();
+  const { setNavMenu, setNewPost } = useContext(MyContext);
   return (
     <section className="reddit_clone-right_Secton_community">
       <p>
@@ -37,11 +38,10 @@ const RightSectionCommunity = () => {
         communities
       </p>
       <button
-        // onClick={() => {
-        //   setNavMenu(arr[0]);
-        //   setNewPost(true);
-        //   navigate("/");
-        // }}
+        onClick={() => {
+          setNavMenu(arr[0]);
+          navigate("/createpost");
+        }}
       >
         Create Post
       </button>

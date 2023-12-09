@@ -1,0 +1,101 @@
+
+.reddit_clone-create_post_head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 58px;
+    margin: 0rem 0px 0rem 297px;
+    width: 50%;
+
+  }
+  .reddit_clone-create_post_head h3 {
+    font-family: "Signika Negative", sans-serif;
+  }
+  .reddit_clone-create_post_line {
+    height: 1px;
+    background-color: white;
+    margin-bottom: 0.5rem;
+  }
+  .reddit_clone-create_post_head button {
+    font-family: "Signika Negative", sans-serif;
+    border: none;
+    width: 22%;
+    background-color: #dae0e6;
+    font-weight: bold;
+    color: #0079ff;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .reddit_clone-create_post_head button span {
+    color: white;
+    background-color: #606c5d;
+    padding: 0 0.2rem;
+    font-weight: 200;
+  }
+  .reddit_clone-create_post_head button:hover {
+    background-color:#c5c8cc;
+    border-radius: 1rem;
+  }
+  .reddit_clone-create_post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 1rem; */
+    /* margin-top: 1rem; */
+    font-family: "Signika Negative", sans-serif;
+    /* justify-content: center; */
+    /* width: 80%; */
+    color: #0c0c0c;
+    background-color: white;
+  }
+  .reddit_clone-create_post_links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color:white;
+    margin-left: -77px;
+    width: 50%;
+  }
+  .reddit_clone-create_post_select {
+    padding: 0.5rem;
+    font-family: "Signika Negative", sans-serif;
+    border: 2px solid #343536;
+    text-align: start;
+    margin: 0.5rem 0;
+    background-color: white;
+    color: #0c0c0c;
+    margin-left: 299px;
+  }
+  
+  .reddit_clone-create_post_links > * {
+    flex: 1;
+  }
+  .reddit_clone-create_post_links button {
+    cursor: pointer;
+    border: none;
+    padding: 0.8rem 0;
+    text-decoration: none;
+    text-align: center;
+    color:#606c5d;
+    background-color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    height: 4rem;
+  }
+  
+  .reddit_clone-create_post_links button {
+    border: 1px solid #343536;
+  }
+  .reddit_clone-create_post_links button:hover {
+    /* color: #0079ff; */
+    background-color: #9a9a9b;
+    /* border-bottom: 2px solid #0079ff */
+  }
+  .reddit_clone-create_post_types {
+    width: 100%;
+    padding: 0.5rem;
+  }
+  

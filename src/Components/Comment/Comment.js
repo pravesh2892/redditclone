@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import "./Comment.css";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -6,11 +6,22 @@ import { MdDeleteForever } from "react-icons/md";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ImArrowDown, ImArrowUp } from "react-icons/im";
 import { BsSave } from "react-icons/bs";
+import { MyContext } from "../../Utils/MyContext";
 
 const Comments = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState();
-
+  const {
+    login,
+    setLogin,
+    setShowForm,
+    theme,
+    userName,
+    setTheme,
+    setNavMenu,
+    userId,
+    setUserId,
+  } = useContext(MyContext);
  
 
   var key = "content";
@@ -20,7 +31,7 @@ const Comments = ({ postId }) => {
   obj[key] = commentText;
 
   useEffect(() => {
-    const token = window.localStorage.getItem("jwt");
+    const token =localStorage.getItem("jwt");
     const fetchComments = async () => {
       try {
         const response = await fetch(
@@ -50,7 +61,7 @@ const Comments = ({ postId }) => {
   }, [postId]);
 
   const commentSend = () => {
-    const token = window.sessionStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
     var myHeaders = new Headers();
     myHeaders.append("projectID", "f104bi07c490");
     myHeaders.append("Content-Type", "application/json");
@@ -89,7 +100,7 @@ const Comments = ({ postId }) => {
   };
 
   const deleteComment = async (commentId) => {
-    const token = window.localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");;
   
     try {
       const response = await fetch(
@@ -105,6 +116,7 @@ const Comments = ({ postId }) => {
       );
   
       const res = await response.json();
+      console.log("comment data", res);
       if (response.ok) {
         const updatedComments = comments.filter(
           (comment) => comment.id !== commentId
@@ -170,7 +182,7 @@ const Comments = ({ postId }) => {
             alt="userlogo"
           />
           <div>
-            <h5>{comment.name}</h5>
+            <h5>{comment.userName}</h5>
             <p>{comment.content}</p>
           </div>
           <small>{new Date(comment.time).toLocaleTimeString([], {

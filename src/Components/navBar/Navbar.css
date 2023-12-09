@@ -198,12 +198,12 @@
   }
   .reddit_clone-nav_username_user p {
     font-family:  "Signika Negative", sans-serif;
-    /* font-size: 1.5rem; */
-    font-size: 1rem;
+    color:#343536 ;
+    font-size: .8rem;
     font-weight: bold;
   }
   .reddit_clone-nav_username_user p:nth-of-type(2) {
-    color: #343536;;
+    color: #343536;
     font-family:  "Signika Negative", sans-serif;
     font-weight: 400;
   }

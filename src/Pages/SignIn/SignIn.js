@@ -51,18 +51,22 @@ const SignIn = () => {
           }),
         }
       );
+      
       if (data) {
         setUser1({
           email: "",
           password: "",
         });
         let json = await data.json();
-        console.log(json);
+        console.log("login user data",json);
         if (json.status === "fail") {
           alert(json.message);
         } else {
           window.localStorage.setItem("jwt", json.token);
           console.log("JWT Token:", json.token);
+          const userName = json.data.name;
+          console.log("username", userName)
+          setUserName(userName);
           setLogin(true);
     
           alert("Login Succesfully");

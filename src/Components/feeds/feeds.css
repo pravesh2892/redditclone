@@ -26,12 +26,12 @@
   }
   .feed p {
     margin-bottom: 1rem;
-    padding-left: 20px;
+    padding-left: 7px;
   }
   .feed .mid-content img {
-    width: 70%;
+    width: 100%;
     border-radius: 0.5rem;
-    margin-left: 50px;
+    margin-left: 1px;
     
   }
   .feed .bottom-content {

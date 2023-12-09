@@ -88,7 +88,7 @@ const Sidebar = () => {
           id="6"
           onClick={() => {
             setNewPost(true);
-            navigate("/comingpage");
+            navigate("/createpost");
           }}
         >
           <AiOutlinePlus className="reddit_clone-nav_menu_icons" /> Create Post

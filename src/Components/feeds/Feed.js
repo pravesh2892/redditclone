@@ -182,7 +182,7 @@ const Feed = ({ fed }) => {
           </div>
             <img src={fed?.author?.profileImage} alt="" />
             <div>
-              <h4>{fed?.author?.name}</h4>
+              <h4 style={{paddingTop:"11px"}}>r/{fed?.author?.name}</h4>
             </div>
           </div>
        
