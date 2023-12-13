@@ -11,6 +11,7 @@ import {
   BsQuestionLg,
   BsShield,
 } from "react-icons/bs";
+import { MdOutlineCancel } from "react-icons/md";
 import { CgLogIn, CgProfile } from "react-icons/cg";
 import { CiCircleMore, CiCoinInsert } from "react-icons/ci";
 import { FaReddit } from "react-icons/fa";
@@ -221,6 +222,7 @@ const Navbar = () => {
   const [border, setBorder] = useState();
   const [searchText, setSearchText] = useState();
   const [posts, setPosts] = useState({});
+  const [searchResultExists, setSearchResultExists] = useState(false);
   const {
     login,
     setShowForm,
@@ -267,10 +269,16 @@ const Navbar = () => {
       console.log("search result", res);
       setPosts(res);
       setSearch(res);
+      setSearchResultExists(true);
       navigate("/search");
     } catch (error) {
       console.error("Error fetching data:", error);
     }
+  };
+ 
+  const clearSearchResults = () => {
+    setSearchResultExists(false);
+    setSearchText(''); 
   };
 
   const handleGetAppClick = () => {
@@ -352,6 +360,13 @@ const Navbar = () => {
                 }
               }}
                 />
+                 {searchResultExists && (
+                <MdOutlineCancel 
+                 className="cancel-icon"
+                style={{color:"black"}}
+             
+                onClick={clearSearchResults} />
+              )}
             </div>
             {login && (
               <div className="reddit_clone-mid_icons">

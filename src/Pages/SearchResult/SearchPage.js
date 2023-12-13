@@ -6,7 +6,6 @@ function SearchPage() {
     const {  search } = useContext(MyContext);
     console.log("search reasult in searchPage1", search)
   
-      console.log("search reasult in searchPage2", search)
   return (
     <>
      <div className="feeds">

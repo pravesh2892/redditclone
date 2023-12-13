@@ -238,23 +238,37 @@
   .reddit_clone-nav_input_item {
     flex: 4;
     width: 100%;
-    /* border: 2px solid blue; */
   }
+  
+  .search-wrapper {
+    position: relative;
+  }
+  
   .reddit_clone-nav_input_item input {
     width: 100%;
-    /* border: 2px solid orangered; */
     border: 1px solid transparent;
     font-family: "Signika Negative", sans-serif;
     background-color: #8f8f8f79;
     font-size: 1rem;
-    padding: 0.5rem;
+    padding: 0.5rem 2rem 0.5rem 0.5rem; /* Adjust right padding to accommodate the icon */
     border-radius: 1.5rem;
     color: white;
-   
+    position: relative;
   }
+  
   .reddit_clone-nav_input_item input:focus {
     outline: 0.5px solid #0079ff;
   }
+  
+  .cancel-icon {
+    position: absolute;
+    top: 50%;
+    right: 27.75rem; 
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  
   .reddit_clone-nav_login_part {
     flex: 1;
     display: flex;
