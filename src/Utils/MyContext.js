@@ -45,7 +45,7 @@ const MyProvider = ({ children }) => {
   const [path, setPath] = useState("/");
   const [qr, setQr] = useState(false);
   const [filterPost, setFilterPost] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState([]);
   const [pseudoPost, setPseudoPost] = useState([]);
   const [images, setImages] = useState([]);
   const [userId, setUserId] = useState("");

@@ -13,6 +13,7 @@ import CommingSoon from './Components/CommingSoon/CommingSoon';
 import Coins from './Components/Coins/Coins';
 import Message from './Pages/Message/Message';
 import CreatePost from './Components/CreatePost/CreatePost';
+import SearchPage from './Pages/SearchResult/SearchPage';
 
 
 function App() {
@@ -23,15 +24,16 @@ function App() {
     <Navbar />
     
    <Routes>
-    <Route  path="/" element={<Home />}/>
+    <Route path="/" element={<Home />}/>
     <Route path="/signin" element={<SignIn />} />
     <Route path="/signup" element={<Signup />} />
-    <Route  path="/redditqr" element={<RedditQr />}/>
+    <Route path="/redditqr" element={<RedditQr />}/>
     <Route path="/premium" element={<Premium />} />
     <Route path="/comingpage" element ={<CommingSoon />} />
     <Route path="/coins" element={<Coins />} />
     <Route path="/message" element={<Message />} />
     <Route path='/createpost' element={<CreatePost />} />
+    <Route path='/search' element={<SearchPage />} />
    </Routes>
    </Router>
  

@@ -219,7 +219,8 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth > 1200);
   const [border, setBorder] = useState();
-
+  const [searchText, setSearchText] = useState();
+  const [posts, setPosts] = useState({});
   const {
     login,
     setShowForm,
@@ -254,6 +255,23 @@ const Navbar = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  const getSearchResult = async () => {
+    try {
+      let response =await  fetch(`https://academics.newtonschool.co/api/v1/reddit/post?search={"author.name":"${searchText}"}`, {
+        headers: {
+          projectID: "f104bi07c490",
+        }
+    })
+      const res = await response.json();
+      console.log("search result", res);
+      setPosts(res);
+      setSearch(res);
+      navigate("/search");
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const handleGetAppClick = () => {
     navigate("/redditqr");
@@ -324,7 +342,16 @@ const Navbar = () => {
 
           <div className="reddit_clone-nav_input">
             <div className="reddit_clone-nav_input_item">
-              <input type="text" placeholder="🔍 Search Reddit" />
+              <input type="text"
+               placeholder="🔍 Search Reddit"
+               value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  getSearchResult();
+                }
+              }}
+                />
             </div>
             {login && (
               <div className="reddit_clone-mid_icons">
