@@ -61,19 +61,12 @@ const PostText = (props) => {
     setWait("Please Wait...");
     setLoading(true);
 
-    const token = localStorage.getItem("facebook-token");
+    const token = localStorage.getItem("jwt");
     var myHeaders = new Headers();
     myHeaders.append("projectID", "f104bi07c490");
     myHeaders.append("Authorization", "Bearer " + token);
-    const data = {
-      userName: userName,
-      userPhoto,
-      title: inp?.title,
-      image: image,
-      vote: 0,
-      textArea: inp?.textArea,
-    };
-    // setUpdate([data, ...update]);
+    
+  
     const formData = new FormData();
     formData.append("userName", userName);
     formData.append("userPhoto", userPhoto);
@@ -97,6 +90,8 @@ const PostText = (props) => {
             requestOptions
           )
       const postData = res.data;
+      console.log("create post data", res)
+      console.log("create-post", postData)
       if (postData.status == "success") {
         setUpdate([postData.data, ...update]);
         console.log(postData.data, "post upload successful");
@@ -104,8 +99,6 @@ const PostText = (props) => {
     } catch (error) {
       console.log(error);
     }
-
-    // ************************************work in progress...
     setWait(null);
     setLoading(false);
     setNewPost((p) => !p);
