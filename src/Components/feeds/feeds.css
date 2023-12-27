@@ -71,7 +71,42 @@
     
   }
  
+.comment-btn{
+  border: .5px solid  transparent;
+  background-color: #e6e6e6;
+  border-radius: 10px 10px 10px 10px;
+  height: 30px;
+  width: 57px;
+ 
+}
 
+.share-btn{
+  display: flex;
+  flex-direction: row;
+  border: .5px solid  transparent;
+  background-color: #e6e6e6;
+  border-radius: 10px 10px 10px 10px;
+  height: 30px;
+  width: 78px;
+}
+.share-btn span{
+  font-size: 15px;
+  line-height: 1.25rem;
+  padding-top: 6px;
+  padding-left: 13px; 
+}
+.comment-btn span{
+  padding-left: 13px;
+}
+.save-btn{
+  display: flex;
+  flex-direction: row;
+  border: .5px solid  transparent;
+  background-color: #e6e6e6;
+  border-radius: 10px 10px 10px 10px;
+  height: 30px;
+  width: 78px;
+}
   .reddit_clone-arrow_up,
 .reddit_clone-arrow_down {
   font-size: 1.5rem;
