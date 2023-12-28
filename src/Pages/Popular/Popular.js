@@ -4,7 +4,7 @@ import Feeds from '../../Components/feeds/Feeds'
 
 function Popular() {
   return (
-    <div>
+    <div style={{backgroundColor:"#dadada"}}>
        <ImageSlider /> 
        <Feeds />
     </div>
