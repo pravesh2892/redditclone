@@ -263,7 +263,7 @@
   .cancel-icon {
     position: absolute;
     top: 50%;
-    right: 27.75rem; 
+     right: 34.75rem; 
     transform: translateY(-50%);
     cursor: pointer;
   }

@@ -37,8 +37,9 @@ const PostText = () => {
     e.preventDefault();
     const token = localStorage.getItem("jwt");
     var myHeaders = new Headers();
-    myHeaders.append("projectID", "f104bi07c490");
+    myHeaders.append("projectID", "f104bi07c480");
     myHeaders.append("Authorization", "Bearer " + token);
+    myHeaders.append("profileImage", "https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png")
     
     var formdata = new FormData();
     formdata.append("title", "title");

@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import "./feeds.css";
-import { BsSave } from "react-icons/bs";
+import { BsSave, BsTrash, BsThreeDots  } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MyContext } from "../../Utils/MyContext";
 import { Link, useNavigate } from "react-router-dom";
 import Comments from "../Comment/Comment";
 
-const Feed = ({ fed }) => {
+const Feed = ({ fed, removePost }) => {
   const [likeColor, setLikeColor] = useState("#e6e6e6");
   const [dislikeColor, setDislikeColor] = useState("#e6e6e6");
   const {
@@ -27,7 +27,7 @@ const Feed = ({ fed }) => {
   const [save, setSave] = useState(false);
   const navigate = useNavigate();
   const commentBoxRef = useRef(null);
-
+  const token = localStorage.getItem("jwt");
   const handleShare = (e) => {
     if (!login) {
       navigate("/signin");
@@ -70,6 +70,51 @@ const Feed = ({ fed }) => {
       theme: "light",
     });
   };
+
+  const handleDeletePost = (e) => {
+    e.stopPropagation();
+    if (!login) {
+      navigate("/signin");
+      return;
+    }
+
+    fetch(`https://academics.newtonschool.co/api/v1/reddit/post/${fed?._id}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'projectID': "f104bi07c480"
+      }
+    })
+    .then((response) => {
+      if (response.ok) {
+        toast.success("Post deleted successfully", {
+          position: toast.POSITION.TOP_CENTER,
+          progress: undefined,
+          hideProgressBar: false,
+          theme: "light",
+        });
+       
+        removePost(fed._id); // Call the function to remove the post
+      } else {
+        toast.error("Failed to delete post", {
+          position: toast.POSITION.TOP_CENTER,
+          progress: undefined,
+          hideProgressBar: false,
+          theme: "light",
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error deleting post:", error);
+      toast.error("Failed to delete post", {
+        position: toast.POSITION.TOP_CENTER,
+        progress: undefined,
+        hideProgressBar: false,
+        theme: "light",
+      });
+    });
+  };
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -135,6 +180,9 @@ const Feed = ({ fed }) => {
           <div>
             <h4 style={{ paddingTop: "7px" }}>r/{fed?.author?.name}</h4>
           </div>
+          <div className="delete-btn" onClick={handleDeletePost}>
+        <BsTrash />
+      </div>
         </div>
       </div>
       <div className="mid-content">

@@ -262,7 +262,7 @@ const Navbar = () => {
     try {
       let response =await  fetch(`https://academics.newtonschool.co/api/v1/reddit/post?search={"author.name":"${searchText}"}`, {
         headers: {
-          projectID: "f104bi07c490",
+          projectID: "f104bi07c480",
         }
     })
       const res = await response.json();

@@ -59,17 +59,7 @@ const Sidebar = () => {
         >
           <BsArrowUpRightCircle className="reddit_clone-nav_menu_icons" /> Popular
         </button>
-        <button
-          id="3"
-          onClick={() => {
-            setIsAllPage(true);
-            setRedditIndex((p) => p + 1);
-  
-            // navigate("/popular");
-          }}
-        >
-          <BsFileBarGraph className="reddit_clone-nav_menu_icons" /> All
-        </button>
+        
         <hr />
         <p style={{ fontSize: "0.8rem", paddingTop:"15px" }}>OTHER</p>
         <button id="4" onClick={() => navigate("/comingpage")}>

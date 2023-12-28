@@ -40,7 +40,7 @@ const Comments = ({ postId }) => {
             method: "GET",
             headers: {
               Authorization: `Bearer ${token}`,
-              projectID: "f104bi07c490",
+              projectID: "f104bi07c480",
               "Content-Type": "application/json",
             },
           }
@@ -109,7 +109,7 @@ const Comments = ({ postId }) => {
           method: "DELETE",
           headers: {
             Authorization: `Bearer ${token}`,
-            projectID: "f104bi07c490",
+            projectID: "3ggih9l8ac0f",
             "Content-Type": "application/json",
           },
         }
