@@ -38,16 +38,16 @@
     font-size: 1.5em;
     margin-bottom: 5px;
     position: absolute;
-    top: 54%;
-    left: 50%;
+    top: 51%;
+    left: 47%;
     transform: translate(-50%, -50%);
     z-index: 1;
     color: #ffffff;
     text-align: center;
     width: 90%;
-    overflow: hidden; /* Hide overflowing text */
-    white-space: nowrap; /* Prevent text wrapping */
-    text-overflow: ellipsis; /* Show ellipsis for overflow */
+    overflow: hidden;
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
   }
   
   .swiper-slide-carousel p {
@@ -59,10 +59,10 @@
     top: 62%;
     transform: translateX(-50%);
     z-index: 1;
-    overflow: hidden; /* Hide overflowing text */
+    overflow: hidden; 
     max-width: 90%;
-    white-space: nowrap; /* Prevent text wrapping */
-    text-overflow: ellipsis; /* Show ellipsis for overflow */
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
   }
 
   .user-bottom {
@@ -84,7 +84,7 @@
     border-radius: 50%;
   }
   
-  /* Additional CSS for spans */
+ 
   .user-bottom .font-bold {
     font-weight: bold;
   }
@@ -94,5 +94,5 @@
   }
   
   .user-bottom .text-coolgray-350 {
-    color: #ccc; /* Adjust color as needed */
+    color: #ccc; 
   }
