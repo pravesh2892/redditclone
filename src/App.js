@@ -14,6 +14,7 @@ import Coins from './Components/Coins/Coins';
 import Message from './Pages/Message/Message';
 import CreatePost from './Components/CreatePost/CreatePost';
 import SearchPage from './Pages/SearchResult/SearchPage';
+import Popular from './Pages/Popular/Popular';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
     <Route path="/message" element={<Message />} />
     <Route path='/createpost' element={<CreatePost />} />
     <Route path='/search' element={<SearchPage />} />
+    <Route path='/popular' element={<Popular />} />
    </Routes>
    </Router>
  

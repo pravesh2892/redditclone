@@ -52,7 +52,7 @@ const Sidebar = () => {
         <button
           id="2"
           onClick={() => {
-            // navigate("/popular");
+            navigate("/popular");
             setIsAllPage(false);
             setIsPopularPage(true);
           }}

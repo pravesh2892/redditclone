@@ -16,7 +16,6 @@ const PostText = () => {
     userId,
     setLoading,
   } = useContext(MyContext);
-  const [title, setTitle] = useState("");
   const [textValue, setTextValue] = useState("");
   const [image, setImage] = useState();
   const [imageURL, setImageURL] = useState();
@@ -35,6 +34,7 @@ const PostText = () => {
   };
   const addPost = async (e) => {
     e.preventDefault();
+
     const token = localStorage.getItem("jwt");
     var myHeaders = new Headers();
     myHeaders.append("projectID", "f104bi07c480");
@@ -42,10 +42,11 @@ const PostText = () => {
     myHeaders.append("profileImage", "https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png")
     
     var formdata = new FormData();
-    formdata.append("title", "title");
     formdata.append("content", textValue);
     formdata.append("images", image);
-
+    console.log("post image", image)
+   
+   
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -88,10 +89,6 @@ const PostText = () => {
           {image ? (
             <div>
               <img src={image} style={{ maxWidth: "50%" }}></img>
-              <br />
-              <button style={{ margin: "1rem 0" }} onChange={handleImageChange}>
-                Delete
-              </button>
             </div>
           ) : (
             <div>

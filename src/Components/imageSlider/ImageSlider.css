@@ -1,0 +1,98 @@
+
+.largerCarousel {
+    padding-left: 279px;
+    padding-top: 73px;
+  }
+  
+  
+ 
+
+.largerCarousel .large-slider-img {
+    width: 314px;
+    max-width: 400px;
+    height: 215px;
+    border-radius: 16px;
+    position: relative;
+  }
+  
+  .largerCarousel .large-slider-img::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.15) 60%, rgba(0, 0, 0, 0.3) 100%);
+  }
+  
+  
+  .swiper-slide-carousel {
+    margin-right: 10px;
+    position: relative; 
+    
+  }
+  
+  
+  .swiper-slide-carousel h2 {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    color: #ffffff;
+    text-align: center;
+    width: 90%;
+    overflow: hidden; /* Hide overflowing text */
+    white-space: nowrap; /* Prevent text wrapping */
+    text-overflow: ellipsis; /* Show ellipsis for overflow */
+  }
+  
+  .swiper-slide-carousel p {
+    font-size: 1em;
+    color: #ffffff;
+    position: absolute;
+    bottom: 10px;
+    left: 51%;
+    top: 62%;
+    transform: translateX(-50%);
+    z-index: 1;
+    overflow: hidden; /* Hide overflowing text */
+    max-width: 90%;
+    white-space: nowrap; /* Prevent text wrapping */
+    text-overflow: ellipsis; /* Show ellipsis for overflow */
+  }
+
+  .user-bottom {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 10px;
+    left: 21px;
+    z-index: 1;
+    color: #ffffff;
+    gap: 5px;
+  }
+  
+  .user-bottom img {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    border: 1px solid rgb(129, 129, 129);
+    border-radius: 50%;
+  }
+  
+  /* Additional CSS for spans */
+  .user-bottom .font-bold {
+    font-weight: bold;
+  }
+  
+  .user-bottom .ml-xs {
+    margin-left: 5px;
+  }
+  
+  .user-bottom .text-coolgray-350 {
+    color: #ccc; /* Adjust color as needed */
+  }

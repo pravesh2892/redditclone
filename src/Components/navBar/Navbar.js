@@ -372,7 +372,7 @@ const Navbar = () => {
               <div className="reddit_clone-mid_icons">
                 <button
                   onClick={() => {
-                    // navigate("/popular");
+                    navigate("/popular");
                     setNavMenu(arr[1]);
                     setIsAllPage(false);
                   }}

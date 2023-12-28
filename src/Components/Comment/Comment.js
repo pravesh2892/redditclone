@@ -83,8 +83,10 @@ const Comments = ({ postId }) => {
       requestOptions
     )
       .then((response) => {
+        
         if (response.ok) {
           setComments(...Comments, response.data);
+          console.log("comment data", response.data)
           toast.success(response.message, {
             position: toast.POSITION.TOP_CENTER,
           });

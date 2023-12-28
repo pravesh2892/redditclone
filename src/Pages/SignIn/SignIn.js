@@ -68,6 +68,8 @@ const SignIn = () => {
           console.log("username", userName)
           setUserName(userName);
           setLogin(true);
+          const userPhotoUrl = "https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png";
+          setUserPhoto(userPhotoUrl);
     
           alert("Login Succesfully");
           navigate("/");

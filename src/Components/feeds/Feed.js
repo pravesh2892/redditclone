@@ -28,6 +28,7 @@ const Feed = ({ fed, removePost }) => {
   const navigate = useNavigate();
   const commentBoxRef = useRef(null);
   const token = localStorage.getItem("jwt");
+  
   const handleShare = (e) => {
     if (!login) {
       navigate("/signin");
