@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./CreatePost.css";
 import { BsFillFileEarmarkPostFill, BsFileImage } from "react-icons/bs";
-import { HiLink } from "react-icons/hi";
-import { FaPollH } from "react-icons/fa";
 import PostText from "./PostText";
+import Rightbar from "../Rightbar/Rightbar";
 
 const makeStyle = {
   borderBottom: "2px solid #0079ff",
@@ -27,40 +26,26 @@ const CreatePost = () => {
         <option value="">Choose A Community</option>
         <option value="">User</option>
       </select>
+     
       <div className="reddit_clone-create_post">
         <div className="reddit_clone-create_post_links">
-          <button
-            id="post"
-            onClick={handleClick}
-            style={postType === "post" ? makeStyle : {}}
-          >
-            <BsFillFileEarmarkPostFill /> Post
-          </button>
+        
           <button
             id="img_video"
             onClick={handleClick}
             style={postType === "img_video" ? makeStyle : {}}
           >
-            <BsFileImage /> Images& Video
+            <BsFileImage /> Title & Images
           </button>
-          <button
-            id="link"
-            onClick={handleClick}
-            style={postType === "link" ? makeStyle : {}}
-          >
-            <HiLink /> Link
-          </button>
-          <button
-            id="poll"
-            onClick={handleClick}
-            style={postType === "poll" ? makeStyle : {}}
-          >
-            <FaPollH /> Poll
-          </button>
+        
+        
         </div>
         <div className="reddit_clone-create_post_types">
           <PostText post={postType} />
         </div>
+        <div className="reddit_clone-content">
+        <Rightbar />
+      </div>
       </div>
     </>
   );

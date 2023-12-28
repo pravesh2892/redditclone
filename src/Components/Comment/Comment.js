@@ -100,7 +100,7 @@ const Comments = ({ postId }) => {
   };
 
   const deleteComment = async (commentId) => {
-    const token = localStorage.getItem("jwt");;
+    const token = localStorage.getItem("jwt");
   
     try {
       const response = await fetch(

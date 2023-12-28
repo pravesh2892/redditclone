@@ -1,30 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
 import { GrCircleInformation } from "react-icons/gr";
 import { MyContext } from "../../Utils/MyContext";
 import "./PostText.css";
+import { ToastContainer, toast } from "react-toastify";
 
 
-
-const ImageUpload = ({ setImg, setNormalImage, image }) => {
-  const handleChange = (e) => {
-    setNormalImage(e.target.files[0]);
-    setImg(URL.createObjectURL(e.target.files[0]));
-  };
-  return (
-    <div className="reddit_clone-createpost_img">
-      {image ? (
-        <img
-          src={URL.createObjectURL(image)}
-          style={{ maxWidth: "100%" }}
-        ></img>
-      ) : (
-        <input type="file" name="" id="" onChange={handleChange} />
-      )}
-    </div>
-  );
-};
-const PostText = (props) => {
+const PostText = () => {
   const {
     update,
     setUpdate,
@@ -35,158 +16,110 @@ const PostText = (props) => {
     userId,
     setLoading,
   } = useContext(MyContext);
-  const [normalImage, setNormalImage] = useState("");
-  const [wait, setWait] = useState();
-  const inpRef = useRef();
+  const [title, setTitle] = useState("");
+  const [textValue, setTextValue] = useState("");
   const [image, setImage] = useState();
-  const [inp, setInp] = useState({
-    title: "",
-    textArea: "",
-  });
-  const { post } = props;
-  const handleChange = (e) => {
-    setInp({ ...inp, [e.target.name]: e.target.value });
-  };
-  const handleImage = (e) => {
+  const [imageURL, setImageURL] = useState();
+  const inpRef = useRef();
+
+  const handleImageChange = (e) => {
+    e.preventDefault();
     const file = e.target.files[0];
-    setNormalImage(e.target.files[0]);
+    console.log("file", file);
+    setImageURL(URL.createObjectURL(file));
     const reader = new FileReader();
     reader.onload = () => {
       setImage(reader.result);
     };
     reader.readAsDataURL(file);
   };
-  const handlePost = async () => {
-    if (!login) return;
-    setWait("Please Wait...");
-    setLoading(true);
-
+  const addPost = async (e) => {
+    e.preventDefault();
     const token = localStorage.getItem("jwt");
     var myHeaders = new Headers();
     myHeaders.append("projectID", "f104bi07c490");
     myHeaders.append("Authorization", "Bearer " + token);
     
-  
-    const formData = new FormData();
-    formData.append("userName", userName);
-    formData.append("userPhoto", userPhoto);
-    formData.append("title", inp?.title);
-    formData.append("image", normalImage);
-    formData.append("textArea", inp?.textArea);
-    formData.append("user", userId);
+    var formdata = new FormData();
+    formdata.append("title", "title");
+    formdata.append("content", textValue);
+    formdata.append("images", image);
 
-    
-
-    console.log(normalImage);
-    try {
-        var requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: formData,
-          };
-      
-          const res = await fetch(
-            "https://academics.newtonschool.co/api/v1/facebook/post",
-            requestOptions
-          )
-      const postData = res.data;
-      console.log("create post data", res)
-      console.log("create-post", postData)
-      if (postData.status == "success") {
-        setUpdate([postData.data, ...update]);
-        console.log(postData.data, "post upload successful");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    setWait(null);
-    setLoading(false);
-    setNewPost((p) => !p);
-  };
-  useEffect(() => {
-    return () => {
-      window.location.reload();
-      setLoading(true);
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formdata,
     };
-  }, []);
+
+    const resp = await fetch(
+      "https://academics.newtonschool.co/api/v1/reddit/post",
+      requestOptions
+    )
+      .then(async (response) => {
+        const res = await response.json();
+        console.log("status", res);
+        if (res.status === "success") {
+          setTextValue("");
+          setImage(null);
+          setImageURL(null);
+          toast.success(res.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        } else {
+          toast.error(res.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
+        return response;
+      })
+      .then((result) => {
+        console.log("result", result);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
   return (
     <div className="reddit_clone-post_type">
-      <input
-        type="text"
-        placeholder="Title"
-        name="title"
-        maxLength={300}
-        onChange={handleChange}
-        value={inp.title}
-      />
-      {post == "img_video" && (
+     
+     
         <div className="reddit_clone-post_image">
           {image ? (
             <div>
-              <img src={image} style={{ maxWidth: "100%" }}></img>
+              <img src={image} style={{ maxWidth: "50%" }}></img>
               <br />
-              <button style={{ margin: "1rem 0" }} onClick={() => setImage("")}>
+              <button style={{ margin: "1rem 0" }} onChange={handleImageChange}>
                 Delete
               </button>
             </div>
           ) : (
             <div>
               <button onClick={() => inpRef.current.click()}> Upload</button>
-              <input type="file" onChange={handleImage} ref={inpRef} />
+              <input type="file" onChange={handleImageChange} ref={inpRef} />
             </div>
           )}
         </div>
-      )}
+    
       <textarea
         name="textArea"
         id=""
         cols="30"
-        rows={post == "link" ? "5" : post === "img_video" ? "5" : "10"}
-        placeholder={post == "link" ? "Url" : "Text(Optional)"}
-        onChange={handleChange}
-        value={inp.textArea}
+        rows= "5" 
+       
+        value={textValue}
+          onChange={(e) => {
+            e.preventDefault();
+            setTextValue(e.target.value);
+          }}
       ></textarea>
-      <div className="reddit_clone-post_type_buttons">
-        <button className="">
-          <AiOutlinePlus />
-          type
-        </button>
-        <button>
-          <AiOutlinePlus /> Spoiler
-        </button>
-        <button>
-          <AiOutlinePlus /> NFW
-        </button>
-      </div>
+      
       <div className="reddit_clone-post_type_save">
+       
         <button
-          style={
-            inp.title.length == 0
-              ? {
-                  backgroundColor: "var(--color-border)",
-                  borderColor: "var(--color-border)",
-                  color: "gray",
-                }
-              : {}
-          }
-        >
-          SaveDraft
-        </button>
-        <button
-          onClick={handlePost}
-          style={
-            inp.title.length == 0
-              ? {
-                  backgroundColor: "var(--color-border)",
-                  borderColor: "var(--color-border)",
-                  color: "gray",
-                }
-              : {}
-          }
-          disabled={inp.title.length == 0}
-          method="POST"
-        >
-          {wait || "Post"}
+           onClick={(e) => addPost(e)}
+          style={{backgroundColor: "#0079D3", borderColor: "#0079D3", color: "white",}}  
+        > 
+        Post
         </button>
       </div>
       <div className="reddit_clone-post_type_notification">
@@ -198,8 +131,23 @@ const PostText = (props) => {
           Connect Accounts to share your post <GrCircleInformation style={{color:"black"}}/>
         </p>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
 
 export default PostText;
+
+
+

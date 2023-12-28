@@ -1,12 +1,14 @@
 
+
 .reddit_clone-create_post_head {
     display: flex;
+    position: relative;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding-top: 58px;
     margin: 0rem 0px 0rem 297px;
-    width: 50%;
+    width: 48%;
 
   }
   .reddit_clone-create_post_head h3 {
@@ -47,9 +49,10 @@
     /* margin-top: 1rem; */
     font-family: "Signika Negative", sans-serif;
     /* justify-content: center; */
-    /* width: 80%; */
+    width: 96%;
     color: #0c0c0c;
     background-color: white;
+   
   }
   .reddit_clone-create_post_links {
     display: flex;
@@ -67,7 +70,7 @@
     margin: 0.5rem 0;
     background-color: white;
     color: #0c0c0c;
-    margin-left: 299px;
+    margin-left: 290px;
   }
   
   .reddit_clone-create_post_links > * {
@@ -99,3 +102,10 @@
     padding: 0.5rem;
   }
   
+  .reddit_clone-content{
+    margin-top: -543px;
+    flex:  1;
+    width: 25%;
+    padding-top: 4rem;
+    margin-left: 966px;
+  }

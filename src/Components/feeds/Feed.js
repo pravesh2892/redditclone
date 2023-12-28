@@ -1,17 +1,8 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import "./feeds.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ImArrowDown, ImArrowUp } from "react-icons/im";
 import { BsSave } from "react-icons/bs";
-import { GoComment } from "react-icons/go";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  faComment,
-  faListDots,
-  faShare,
-  faThumbsUp,
-} from "@fortawesome/free-solid-svg-icons";
 import { MyContext } from "../../Utils/MyContext";
 import { Link, useNavigate } from "react-router-dom";
 import Comments from "../Comment/Comment";
@@ -131,15 +122,9 @@ const Feed = ({ fed }) => {
       setLikeCount(likeCount - 1);
       setDisliked(true);
       setLiked(false);
-      setLikeColor("#e6e6e6");
-      setDislikeColor("#6A5CFF");
-    } else if (disliked) {
-      setLikeCount(likeCount + 1);
-      setLiked(true);
-      setDisliked(false);
       setLikeColor("#6A5CFF");
-      setDislikeColor("#e6e6e6");
-    }
+      setDislikeColor("#6A5CFF");
+    } 
   };
 
   return (
