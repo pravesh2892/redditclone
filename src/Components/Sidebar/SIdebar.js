@@ -18,7 +18,8 @@ const darkModeStyle = {
 const Sidebar = () => {
     const navigate = useNavigate();
     const {
-      setNewPost,
+    login,
+    setNewPost,
     setIsAllPage,
     setIsPopularPage,
     menu,
@@ -28,6 +29,16 @@ const Sidebar = () => {
     setFilterPost,
     setTop,
     } = useContext(MyContext);
+
+    const handleCreatePost = () => {
+      if (!login) {
+        navigate("/signin");
+      } else {
+        navigate("/createpost");
+        setNewPost(true);
+        
+      }
+    };
     return (
       <div
         className="reddit_clone-nav_menu_item"
@@ -76,17 +87,11 @@ const Sidebar = () => {
         </button>
         <button
           id="6"
-          onClick={() => {
-            setNewPost(true);
-            navigate("/createpost");
-          }}
+          onClick={handleCreatePost}
         >
           <AiOutlinePlus className="reddit_clone-nav_menu_icons" /> Create Post
         </button>
-        {/* <button id="7" >
-          <IoIosNotificationsOutline className="reddit_clone-nav_menu_icons" />{" "}
-          Notifications
-        </button> */}
+        
         <button id="8"  onClick={() => navigate("/coins")}>
           <CiCoinInsert className="reddit_clone-nav_menu_icons" /> Coins
         </button>
