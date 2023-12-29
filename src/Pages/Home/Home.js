@@ -11,9 +11,9 @@ function Home() {
             <Rightbar  />
             </div>
             <div className="reddit_clone-app_add_post">
-            <Stick />
-            </div>
+            
             <Feeds />
+            </div>
          
     </div>
   )

@@ -34,52 +34,53 @@ const PostText = () => {
   };
   const addPost = async (e) => {
     e.preventDefault();
-
+  
     const token = localStorage.getItem("jwt");
-    var myHeaders = new Headers();
+    const myHeaders = new Headers();
     myHeaders.append("projectID", "f104bi07c480");
     myHeaders.append("Authorization", "Bearer " + token);
-    myHeaders.append("profileImage", "https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png")
-    
-    var formdata = new FormData();
+  
+    // Include user photo in headers if available
+    if (userPhoto) {
+      myHeaders.append("userPhoto", userPhoto); // Assuming userPhoto holds the image data or URL
+    }
+  
+    const formdata = new FormData();
     formdata.append("content", textValue);
     formdata.append("images", image);
-    console.log("post image", image)
-   
-   
-    var requestOptions = {
+    console.log("image", image);
+  
+    const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: formdata,
     };
-
-    const resp = await fetch(
-      "https://academics.newtonschool.co/api/v1/reddit/post",
-      requestOptions
-    )
-      .then(async (response) => {
-        const res = await response.json();
-        console.log("status", res);
-        if (res.status === "success") {
-          setTextValue("");
-          setImage(null);
-          setImageURL(null);
-          toast.success(res.message, {
-            position: toast.POSITION.TOP_CENTER,
-          });
-        } else {
-          toast.error(res.message, {
-            position: toast.POSITION.TOP_CENTER,
-          });
-        }
-        return response;
-      })
-      .then((result) => {
-        console.log("result", result);
-      })
-      .catch((error) => {
-        console.log("error", error);
+  
+    try {
+      const response = await fetch(
+        "https://academics.newtonschool.co/api/v1/reddit/post",
+        requestOptions
+      );
+      const res = await response.json();
+  
+      if (res.status === "success") {
+        setTextValue("");
+        setImage(null);
+        setImageURL(null);
+        toast.success(res.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else {
+        toast.error(res.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred while posting", {
+        position: toast.POSITION.TOP_CENTER,
       });
+    }
   };
   return (
     <div className="reddit_clone-post_type">

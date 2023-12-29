@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineMessage, AiOutlinePlus } from "react-icons/ai";
 import { BiLogIn } from "react-icons/bi";
-import { CiSearch } from "react-icons/ci";
 import { FaEllipsisVertical } from "react-icons/fa6";
 import {
   BsArrowBarLeft,
@@ -17,14 +16,10 @@ import { CiCircleMore, CiCoinInsert } from "react-icons/ci";
 import { FaReddit } from "react-icons/fa";
 import { FcAdvertising } from "react-icons/fc";
 import { FiFileText } from "react-icons/fi";
-import { GiAlienSkull } from "react-icons/gi";
-import { FaUserTie } from "react-icons/fa";
 import NavMenu from "../NavMenu/NavMenu";
 import { IoIosNotificationsOutline } from "react-icons/io";
-import { RiContactsLine } from "react-icons/ri";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
-import { AddAPhoto } from "@mui/icons-material";
 import { MyContext } from "../../Utils/MyContext";
 import { arr } from "../NavMenuArray";
 import "./Navbar.css";
@@ -260,22 +255,25 @@ const Navbar = () => {
 
   const getSearchResult = async () => {
     try {
-      let response =await  fetch(`https://academics.newtonschool.co/api/v1/reddit/post?search={"author.name":"${searchText}"}`, {
+      let response = await fetch(`https://academics.newtonschool.co/api/v1/reddit/post?search={"author.name":"${searchText}"}`, {
         headers: {
           projectID: "f104bi07c480",
-        }
-    })
+        },
+      });
       const res = await response.json();
       console.log("search result", res);
-      setPosts(res);
-      setSearch(res);
-      setSearchResultExists(true);
-      navigate("/search");
+      if (res.length === 0) {
+        setSearchResultExists(false);
+      } else {
+        setPosts(res);
+        setSearch(res);
+        setSearchResultExists(true);
+        navigate("/search");
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
- 
   const clearSearchResults = () => {
     setSearchResultExists(false);
     setSearchText(''); 
@@ -367,6 +365,9 @@ const Navbar = () => {
              
                 onClick={clearSearchResults} />
               )}
+              {!searchResultExists && searchText && (
+              <p>No result found</p>
+            )}
             </div>
             {login && (
               <div className="reddit_clone-mid_icons">
