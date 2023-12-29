@@ -109,11 +109,7 @@ const SignIn = () => {
 
         <p style={{ color: "green" }}>{}</p>
         <form className="reddit_clone-login_input">
-        {errors.email && (
-          <Alert variant="danger" style={{ color: 'red' }}>
-            {errors.email}
-          </Alert>
-        )}
+          {error && <Alert variant="danger">{error}</Alert>}
           <TextField
             placeholder="Enter your email"
             type="text"
@@ -127,11 +123,6 @@ const SignIn = () => {
               borderRadius: '1.5rem',
             }}
           />
-           {errors.password && (
-          <Alert variant="danger" style={{ color: 'red' }}>
-            {errors.password}
-          </Alert>
-        )}
           <TextField
             placeholder="Enter your Password"
             name="password"
