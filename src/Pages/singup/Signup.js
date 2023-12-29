@@ -1,38 +1,48 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Typography,  TextField, Button, IconButton } from "@mui/material";
+import { Typography, TextField, Button, IconButton, FormHelperText } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import {  Alert } from "react-bootstrap";
 import "./Signup.css";
 
 const Signup = () => {
-    const navigate = useNavigate();
-    const [showPassword, setShowPassword] = useState(false);
-    const [error] = useState("");
-    const [user, setUser] = useState({
-      name: "",
-      email: "",
-      password: "",
-    });
-  
-    const getUserData = (event) => {
-      let name, value;
-      name = event.target.name;
-      value = event.target.value;
-  
-      if (name === "age") {
-        const ageValue = parseInt(value);
-        if (!isNaN(ageValue) && ageValue >= 0) {
-          setUser({ ...user, [name]: ageValue });
-        } else {
-          alert("Please enter valid age and it should be a number");
-        }
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const getUserData = (event) => {
+    let name, value;
+    name = event.target.name;
+    value = event.target.value;
+
+    if (name === "age") {
+      const ageValue = parseInt(value);
+      if (!isNaN(ageValue) && ageValue >= 0) {
+        setUser({ ...user, [name]: ageValue });
       } else {
-        setUser({ ...user, [name]: value });
+        alert("Please enter a valid age, and it should be a number");
       }
-    };
-  
+    } else {
+      setUser({ ...user, [name]: value });
+
+      // Email validation
+      if (name === "email") {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          setError("Please enter a valid email address");
+        } else {
+          setError("");
+        }
+      }
+    }
+  };
+
     const postData = async (e) => {
       e.preventDefault();
   
@@ -95,7 +105,7 @@ const Signup = () => {
           </p>
         </div>
         <form className="reddit_clone-signup_input" >
-        {error && <Alert variant="danger">{error}</Alert>}
+       
           <TextField
             label="Name"
             name="name"
@@ -107,14 +117,21 @@ const Signup = () => {
             Name
           </TextField>
           <TextField
-            label="Email"
-            type="text"
-            name="email"
-            value={user.email}
-            fullWidth
-            onChange={getUserData}
-            sx={{ marginBottom: 2 }}
-          />
+          label="Email"
+          type="text"
+          name="email"
+          value={user.email}
+          fullWidth
+          onChange={getUserData}
+          error={error ? true : false} // Set error state for red border
+          helperText={error} // Display error message
+          sx={{
+            marginBottom: 2,
+            "& .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline": {
+              borderColor: "red",
+            },
+          }}
+        />
           <TextField
             label="Password"
             name="password"

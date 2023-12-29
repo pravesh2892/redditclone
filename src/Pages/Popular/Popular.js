@@ -7,7 +7,7 @@ function Popular() {
     <div style={{backgroundColor:"#dadada"}}>
        <ImageSlider /> 
        <hr style={{marginTop:"20px", color:"#0000001a", marginLeft:"283px", marginRight:"408px"}}/>
-       <Feeds />
+       <Feeds showStick={false} />
     </div>
   )
 }

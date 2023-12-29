@@ -24,6 +24,7 @@ const SignIn = () => {
     password: "",
   });
   let name, value;
+
   const getUserData = (event) => {
     name = event.target.name;
     value = event.target.value;
@@ -31,6 +32,7 @@ const SignIn = () => {
     setUser1({ ...user, [name]: value });
   };
 
+ 
   const postData = async (e) => {
     e.preventDefault();
     const { email, password } = user;
@@ -52,6 +54,7 @@ const SignIn = () => {
         }
       );
       
+      
       if (data) {
         setUser1({
           email: "",
@@ -59,10 +62,11 @@ const SignIn = () => {
         });
         let json = await data.json();
         console.log("login user data",json);
+        
         if (json.status === "fail") {
           alert(json.message);
         } else {
-          window.localStorage.setItem("jwt", json.token);
+          localStorage.setItem("jwt", json.token);
           console.log("JWT Token:", json.token);
           const userName = json.data.name;
           console.log("username", userName)
@@ -79,11 +83,12 @@ const SignIn = () => {
       alert("Please fill all the data");
     }
   };
+ 
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  
   const handleClosepage = () => {
     navigate("/");
   };
@@ -104,7 +109,11 @@ const SignIn = () => {
 
         <p style={{ color: "green" }}>{}</p>
         <form className="reddit_clone-login_input">
-          {error && <Alert variant="danger">{error}</Alert>}
+        {errors.email && (
+          <Alert variant="danger" style={{ color: 'red' }}>
+            {errors.email}
+          </Alert>
+        )}
           <TextField
             placeholder="Enter your email"
             type="text"
@@ -118,6 +127,11 @@ const SignIn = () => {
               borderRadius: '1.5rem',
             }}
           />
+           {errors.password && (
+          <Alert variant="danger" style={{ color: 'red' }}>
+            {errors.password}
+          </Alert>
+        )}
           <TextField
             placeholder="Enter your Password"
             name="password"

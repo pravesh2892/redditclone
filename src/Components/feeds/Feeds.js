@@ -3,7 +3,7 @@ import "./feeds.css";
 import Feed from "./Feed";
 import Stick from "../../Pages/Popular/Stick";
 
-const Feeds = () => {
+const Feeds = ({showStick = true}) => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [filter, setFilter] = useState("");
@@ -55,12 +55,14 @@ const Feeds = () => {
 
   return (
     <div>
-      <Stick
-        filterHot={() => filterPosts("Hot")}
-        filterNew={() => filterPosts("New")}
-        filterTop={() => filterPosts("Top")}
-        showAll={showAllPosts}
-      />
+      {showStick && (
+        <Stick
+          filterHot={() => filterPosts("Hot")}
+          filterNew={() => filterPosts("New")}
+          filterTop={() => filterPosts("Top")}
+          showAll={showAllPosts}
+        />
+      )}
       <div className="feeds">
         {filteredPosts.map((fed) => (
           <Feed fed={fed} key={fed._id} />
