@@ -6,8 +6,7 @@
   justify-content: space-around;
   gap: 1rem;
   padding: 1rem;
-  padding-top: -400px;
-  margin-left: 310px;
+  margin-left: 23%; /* Example: Using a percentage value instead of fixed pixels */
   border: 1px solid #ccc;
   border-radius: 0.5rem;
 }
@@ -27,7 +26,7 @@
 }
 
 .reddit_clone-popular_stick_item.active {
-  color: #6A5CFF /* Change to your desired active color */
+  color: #6a5cff; /* Fixed missing semicolon and color value */
 }
 
 .reddit_clone-popular_stick_item a {
@@ -54,10 +53,8 @@
     gap: 0;
     justify-content: space-around;
   }
-  .reddit_clone-popular_stick :nth-of-type(3) {
-    display: none;
-  }
-  .reddit_clone-popular_stick :nth-of-type(4) {
+  .reddit_clone-popular_stick_item:nth-of-type(3),
+  .reddit_clone-popular_stick_item:nth-of-type(4) {
     display: none;
   }
 }
