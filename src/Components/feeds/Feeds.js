@@ -21,6 +21,7 @@ const Feeds = ({showStick = true}) => {
         },
       });
       const data = await response.json();
+      console.log("api data", data)
       setPosts(data?.data || []);
       setFilteredPosts(data?.data || []);
     } catch (error) {

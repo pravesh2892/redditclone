@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { TextField, Button, IconButton } from "@mui/material";
@@ -19,20 +19,23 @@ const SignIn = () => {
   } = useContext(MyContext);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const [user, setUser1] = useState({
+  const [emailError, setEmailError] = useState(""); 
+  const [user, setUser] = useState({
     email: "",
     password: "",
   });
-  let name, value;
 
   const getUserData = (event) => {
-    name = event.target.name;
-    value = event.target.value;
+    const { name, value } = event.target;
 
-    setUser1({ ...user, [name]: value });
+    setUser({ ...user, [name]: value });
+
+    // Reset email error message when the user types in the email field
+    if (name === "email") {
+      setEmailError("");
+    }
   };
 
- 
   const postData = async (e) => {
     e.preventDefault();
     const { email, password } = user;
@@ -53,29 +56,33 @@ const SignIn = () => {
           }),
         }
       );
-      
-      
+
       if (data) {
-        setUser1({
+        setUser({
           email: "",
           password: "",
         });
         let json = await data.json();
-        console.log("login user data",json);
-        
+       
+
         if (json.status === "fail") {
-          alert(json.message);
+          setError(json.message); 
+          if (json.error === "invalid_email_or_password") {
+            setEmailError("Invalid email or password"); 
+          }
         } else {
+          setError("");
           localStorage.setItem("jwt", json.token);
           console.log("JWT Token:", json.token);
           const userName = json.data.name;
-          console.log("username", userName)
+          console.log("username", userName);
           setUserName(userName);
           setLogin(true);
-          const userPhotoUrl = "https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png";
+          const userPhotoUrl =
+            "https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png";
           setUserPhoto(userPhotoUrl);
-    
-          alert("Login Succesfully");
+
+          alert("Login Successfully");
           navigate("/");
         }
       }
@@ -83,15 +90,15 @@ const SignIn = () => {
       alert("Please fill all the data");
     }
   };
- 
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  
+
   const handleClosepage = () => {
     navigate("/");
   };
+
   return (
     <div className="reddit_clone-login">
       <div className="reddit_clone-login_close">
@@ -109,7 +116,7 @@ const SignIn = () => {
 
         <p style={{ color: "green" }}>{}</p>
         <form className="reddit_clone-login_input">
-          {error && <Alert variant="danger">{error}</Alert>}
+          {error && <Alert variant="danger" style={{color:"red"}}>{error}</Alert>}
           <TextField
             placeholder="Enter your email"
             type="text"
@@ -118,11 +125,13 @@ const SignIn = () => {
             value={user.email}
             onChange={getUserData}
             sx={{
-             
               marginBottom: 2,
-              borderRadius: '1.5rem',
+              borderRadius: "1.5rem",
             }}
           />
+          {emailError && (
+            <p style={{ color: "red", marginBottom: "5px" }}>{emailError}</p>
+          )}
           <TextField
             placeholder="Enter your Password"
             name="password"
@@ -131,9 +140,8 @@ const SignIn = () => {
             fullWidth
             onChange={getUserData}
             sx={{
-             
               marginBottom: 2,
-              borderRadius: '1.5rem',
+              borderRadius: "1.5rem",
             }}
             InputProps={{
               endAdornment: (
@@ -147,7 +155,6 @@ const SignIn = () => {
                 </IconButton>
               ),
             }}
-          
           />
           <p>
             Forgot your <a href="">username</a> or <a href="">password</a>?

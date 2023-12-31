@@ -5,19 +5,17 @@ import { FaEllipsisVertical } from "react-icons/fa6";
 import {
   BsArrowBarLeft,
   BsArrowUpRightCircle,
-  BsChevronDown,
   BsQrCodeScan,
   BsQuestionLg,
   BsShield,
 } from "react-icons/bs";
 import { MdOutlineCancel } from "react-icons/md";
-import { CgLogIn, CgProfile } from "react-icons/cg";
 import { CiCircleMore, CiCoinInsert } from "react-icons/ci";
 import { FaReddit } from "react-icons/fa";
 import { FcAdvertising } from "react-icons/fc";
 import { FiFileText } from "react-icons/fi";
 import NavMenu from "../NavMenu/NavMenu";
-import { IoIosNotificationsOutline } from "react-icons/io";
+import { IoIosNotificationsOutline,  IoIosLogOut } from "react-icons/io";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../Utils/MyContext";
@@ -32,41 +30,19 @@ const style = {
 
 const Option = () => {
   const {
-    login,
     setLogin,
-    setShowForm,
-    theme,
-    setTheme,
     setNavMenu,
-    userId,
-    setUserId,
   } = useContext(MyContext);
   const navigate = useNavigate();
-  const handleLogin = async () => {
-    if (!login) {
-      navigate("/signin");
-      return;
-    }
-    setLogin(false);
-    const obj = {};
-    try {
+
+  const handleLogout = () => {
       localStorage.removeItem("jwt");
       setLogin(false);
-    } catch (error) {
-      console.log(error);
-    }
+      navigate("/signin")  
   };
 
   return (
     <div className="reddit_clone-nav_option">
-      {/* <button
-      // onClick={() => {
-      //   navigate("/profile");
-      // }}
-      >
-        <CgProfile /> Profile
-      </button> */}
-
       <button
         onClick={() => {
           navigate("/coins");
@@ -95,8 +71,8 @@ const Option = () => {
       <button onClick={() => navigate("/comingpage")}>
         <FcAdvertising /> Advertise on Reddit
       </button>
-      <button onClick={() => navigate("/signin")}>
-        <CgLogIn /> LogIn & LogOut
+      <button onClick={handleLogout}>
+        <IoIosLogOut/> LogOut
       </button>
     </div>
   );

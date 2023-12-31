@@ -49,6 +49,7 @@
   }
   .user{
     display: flex;
+    align-items: center;
     gap: 5px;
   }
   .user img{
@@ -56,6 +57,13 @@
     max-height: 92%;
     border: 1px solid rgb(134, 134, 134);
     border-radius: 50%;
+  }
+
+  .user h4 {
+    margin: 0; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
   }
   .vote-like{
     display: flex;
@@ -121,7 +129,7 @@
 }
 
 .delete-btn{
-  margin-left: 395px;
+  margin-left: 355px;
 }
 
 /* Add these styles to your existing feeds.css */
