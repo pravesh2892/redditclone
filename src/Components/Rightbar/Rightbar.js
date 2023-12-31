@@ -7,7 +7,8 @@ import { MyContext } from "../../Utils/MyContext";
 
 const RightSectionPremium = () => {
   const navigate = useNavigate();
-  const { setNavMenu } = useContext(MyContext);
+  const { login, setNavMenu } = useContext(MyContext);
+ 
   return (
     <section className="reddit_clone-right_section_premium">
       <div className="reddit_clone-right_section_premium_heading">
@@ -30,7 +31,15 @@ const RightSectionPremium = () => {
 };
 const RightSectionCommunity = () => {
   const navigate = useNavigate();
-  const { setNavMenu, setNewPost } = useContext(MyContext);
+  const { login, setNavMenu, setNewPost } = useContext(MyContext);
+
+  const handleCreatePost = () => {
+    if (!login) {
+      navigate("/signin");
+    } else {
+      navigate("/createpost");  
+    }
+  };
   return (
     <section className="reddit_clone-right_Secton_community">
       <p>
@@ -38,14 +47,14 @@ const RightSectionCommunity = () => {
         communities
       </p>
       <button
-        onClick={() => {
-          setNavMenu(arr[0]);
-          navigate("/createpost");
-        }}
+        onClick={handleCreatePost}
       >
         Create Post
       </button>
-      <button>Create Community</button>
+      <button   onClick={() => {
+          navigate("/comingpage");
+        }}>
+      Create Community</button>
     </section>
   );
 };
@@ -116,27 +125,7 @@ const RightSectionFooter = () => {
 const Rightbar = () => {
   const [showDiv, setShowDiv] = useState(false);
   const [width, setWidth] = useState();
-//   const { isPopularPage, setIsPopularPage } = useContext('');
 
-//   useEffect(() => {
-//     function handleScroll() {
-//       if (window.scrollY > 320) {
-//         const w = document.querySelector(
-//           ".reddit_clone-right_Secton_community"
-//         ).offsetWidth;
-//         setShowDiv(true);
-//         setWidth(w);
-//       } else {
-//         setShowDiv(false);
-//       }
-//     }
-
-//     window.addEventListener("scroll", handleScroll);
-
-//     return () => {
-//       window.removeEventListener("scroll", handleScroll);
-//     };
-//   }, []);
   return (
     <>
       {showDiv && (
