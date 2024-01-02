@@ -1,0 +1,25 @@
+
+ 
+@keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(70px);
+    }
+  }
+  
+  .not-found-message {
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    animation: fadeInOut 3s ease-in-out infinite; 
+  }
+  
+
+  

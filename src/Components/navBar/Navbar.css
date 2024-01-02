@@ -396,3 +396,24 @@
       width: 1.5rem;
     }
   }
+
+
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 5px); 
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc; 
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  padding: 8px 12px;
+  z-index: 1000; 
+
+  
+}
+
+.search-dropdown span {
+  color: #555; 
+  font-size: 14px;
+}

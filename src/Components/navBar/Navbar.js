@@ -344,7 +344,6 @@ const Navbar = () => {
                   onClick={clearSearchResults}
                 />
               )}
-              {!searchResultExists && searchText && <p>No result found</p>}
             </div>
             {login && (
               <div className="reddit_clone-mid_icons">

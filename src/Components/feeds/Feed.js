@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import "./feeds.css";
-import { BsSave, BsTrash, BsThreeDots  } from "react-icons/bs";
+import { BsSave, BsTrash  } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MyContext } from "../../Utils/MyContext";
@@ -24,7 +24,6 @@ const Feed = ({ fed, removePost }) => {
   const [likeCount, setLikeCount] = useState(Math.floor(Math.random() * 1000));
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
-  const [save, setSave] = useState(false);
   const navigate = useNavigate();
   const commentBoxRef = useRef(null);
   const token = localStorage.getItem("jwt");
