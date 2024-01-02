@@ -40,9 +40,9 @@ const PostText = () => {
     myHeaders.append("projectID", "f104bi07c480");
     myHeaders.append("Authorization", "Bearer " + token);
   
-    // Include user photo in headers if available
+    
     if (userPhoto) {
-      myHeaders.append("userPhoto", userPhoto); // Assuming userPhoto holds the image data or URL
+      myHeaders.append("userPhoto", userPhoto); 
     }
   
     const formdata = new FormData();

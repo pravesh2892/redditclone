@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./CreatePost.css";
-import { BsFillFileEarmarkPostFill, BsFileImage } from "react-icons/bs";
+import {  BsFileImage } from "react-icons/bs";
 import PostText from "./PostText";
 import Rightbar from "../Rightbar/Rightbar";
 
@@ -17,13 +17,12 @@ const CreatePost = () => {
     <>
       <div className="reddit_clone-create_post_head">
         <h3>Create a post </h3>
-        <button>
-          Drafts<span>1</span>{" "}
-        </button>
+        <div>
+          Drafts<span></span>{" "}
+        </div>
       </div>
       <div className="reddit_clone-create_post_line"></div>
       <select name="" id="" className="reddit_clone-create_post_select">
-        <option value="">Choose A Community</option>
         <option value="">User</option>
       </select>
      

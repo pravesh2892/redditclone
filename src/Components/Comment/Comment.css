@@ -13,7 +13,7 @@
     justify-content: space-between;
   }
   .comments .writebox input {
-    width: 100%;
+    width: 78%;
     background: transparent;
     border: 1px solid #343536;;
     padding: 10px;
@@ -29,3 +29,19 @@
     display: flex;
     float: right;
   }
+
+  .comment-button {
+    background-color: orangered;
+    color: white;
+    border-radius: 12px;
+    border: transparent;
+    height: 32px;
+    width: 64px;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .comment-button:hover {
+    background-color: orange; 
+    cursor: pointer; 
+  }
+  

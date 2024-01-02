@@ -78,7 +78,7 @@ const Feed = ({ fed, removePost }) => {
       navigate("/signin");
       return;
     }
-
+  
     fetch(`https://academics.newtonschool.co/api/v1/reddit/post/${fed?._id}`, {
       method: 'DELETE',
       headers: {
@@ -94,28 +94,20 @@ const Feed = ({ fed, removePost }) => {
           hideProgressBar: false,
           theme: "light",
         });
-       
-        removePost(fed._id); // Call the function to remove the post
+        removePost(fed._id);
       } else {
-        toast.error("Failed to delete post", {
-          position: toast.POSITION.TOP_CENTER,
-          progress: undefined,
-          hideProgressBar: false,
-          theme: "light",
+        return response.json().then((errorData) => {
+          throw new Error(errorData.message || 'Failed to delete post');
         });
       }
     })
     .catch((error) => {
-      console.error("Error deleting post:", error);
-      toast.error("Failed to delete post", {
-        position: toast.POSITION.TOP_CENTER,
-        progress: undefined,
-        hideProgressBar: false,
-        theme: "light",
-      });
+      console.error("Error deleting post:", error.message);
+     
     });
   };
-
+  
+  
 
   useEffect(() => {
     const handleClickOutside = (event) => {

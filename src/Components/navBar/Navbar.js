@@ -108,7 +108,7 @@ const NavIcon = ({ userName, option, setOption }) => {
         </button>
         <button
           onClick={() => {
-            navigate("/");
+            navigate("/createpost");
             setNavMenu(arr[5]);
 
             setNewPost(true);
@@ -118,7 +118,7 @@ const NavIcon = ({ userName, option, setOption }) => {
         </button>
         <button
           onClick={() => {
-            // navigate("/notification");
+            navigate("/comingpage");
             setNavMenu(arr[6]);
           }}
         >

@@ -3,7 +3,7 @@ import "./feeds.css";
 import Feed from "./Feed";
 import Stick from "../../Pages/Popular/Stick";
 
-const Feeds = ({showStick = true}) => {
+const Feeds = ({ showStick = true }) => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [filter, setFilter] = useState("");
@@ -28,9 +28,14 @@ const Feeds = ({showStick = true}) => {
       console.error("Error fetching data:", error);
     }
   };
-  
+
+  const removePost = (postId) => {
+    const updatedPosts = posts.filter((post) => post._id !== postId);
+    setPosts(updatedPosts);
+    setFilteredPosts(updatedPosts); 
+  };
+
   const shuffleArray = (array) => {
-    // Shuffling logic (Fisher-Yates algorithm)
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -48,7 +53,7 @@ const Feeds = ({showStick = true}) => {
     let filtered = [];
 
     if (type === 'Hot' || type === 'New' || type === 'Top') {
-      filtered = shuffleArray(posts).slice(0, 10); // Show a random subset of 10 posts
+      filtered = shuffleArray(posts).slice(0, 10); 
     }
 
     setFilteredPosts(filtered);
@@ -66,7 +71,7 @@ const Feeds = ({showStick = true}) => {
       )}
       <div className="feeds">
         {filteredPosts.map((fed) => (
-          <Feed fed={fed} key={fed._id} />
+          <Feed fed={fed} key={fed._id} removePost={removePost} />
         ))}
       </div>
     </div>
@@ -74,3 +79,4 @@ const Feeds = ({showStick = true}) => {
 };
 
 export default Feeds;
+
