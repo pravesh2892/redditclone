@@ -21,7 +21,8 @@ const Feed = ({ fed, removePost }) => {
     setUserId,
   } = useContext(MyContext);
   const [openComment, setOpenComment] = useState(false);
-  const [likeCount, setLikeCount] = useState(Math.floor(Math.random() * 1000));
+  // const [likeCount, setLikeCount] = useState(Math.floor(Math.random() * 1000));
+  const [likeCount, setLikeCount] = useState(fed?.likeCount);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const navigate = useNavigate();
@@ -141,11 +142,31 @@ const Feed = ({ fed, removePost }) => {
       return;
     }
     if (!liked) {
-      setLikeCount(likeCount + 1);
-      setLiked(true);
-      setDisliked(false);
-      setLikeColor("#D93A00");
-      setDislikeColor("#e6e6e6");
+      fetch(`https://academics.newtonschool.co/api/v1/reddit/like/${fed?._id}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'projectID': "f104bi07c480"
+        }
+      })
+      .then((response) => {
+        if (response.ok) {
+          if (disliked) {
+            setDisliked(false); // Remove dislike if it was already disliked
+            setLikeCount(likeCount + 1); // Increase like count after removing dislike
+          }
+          setLiked(true);
+          setLikeColor("#D93A00");
+          setDislikeColor("#e6e6e6");
+          setLikeCount(likeCount + 1);
+        } else {
+          throw new Error('Failed to upvote post');
+        }
+      })
+      .catch((error) => {
+        console.error("Error upvoting post:", error.message);
+        // Handle error cases or show appropriate message to the user
+      });
     }
   };
 
@@ -155,13 +176,34 @@ const Feed = ({ fed, removePost }) => {
       navigate("/signin");
       return;
     }
-    if (!disliked && likeCount > 0) {
-      setLikeCount(likeCount - 1);
-      setDisliked(true);
-      setLiked(false);
-      setLikeColor("#6A5CFF");
-      setDislikeColor("#6A5CFF");
-    } 
+    if (!disliked) {
+      fetch(`https://academics.newtonschool.co/api/v1/reddit/like/${fed?._id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'projectID': "f104bi07c480"
+        }
+      })
+      .then((response) => {
+        if (response.ok) {
+          if (liked) {
+            setLiked(false); 
+            setLikeCount(likeCount - 1); 
+          }
+          setDisliked(true);
+          setLiked(false);
+          setLikeColor("#6A5CFF");
+          setDislikeColor("#6A5CFF");
+          setLikeCount(likeCount - 1);
+        } else {
+          throw new Error('Failed to downvote post');
+        }
+      })
+      .catch((error) => {
+        console.error("Error downvoting post:", error.message);
+       
+      });
+    }
   };
 
   return (

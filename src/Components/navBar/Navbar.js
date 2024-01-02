@@ -29,7 +29,7 @@ const style = {
 };
 
 const Option = () => {
-  const { setLogin, setNavMenu } = useContext(MyContext);
+  const { login, setLogin, setNavMenu } = useContext(MyContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -68,9 +68,11 @@ const Option = () => {
       <button onClick={() => navigate("/comingpage")}>
         <FcAdvertising /> Advertise on Reddit
       </button>
-      <button onClick={handleLogout}>
-        <IoIosLogOut /> LogOut
-      </button>
+      {login && ( 
+        <button onClick={handleLogout}>
+          <IoIosLogOut /> LogOut
+        </button>
+      )}
     </div>
   );
 };
