@@ -1,25 +1,33 @@
 
- 
-@keyframes fadeInOut {
-    0% {
-      opacity: 0;
-      transform: translateY(-30px);
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(70px);
-    }
-  }
-  
-  .not-found-message {
-    text-align: center;
-    font-size: 18px;
-    color: red;
-    animation: fadeInOut 3s ease-in-out infinite; 
-  }
-  
 
+  .bg-neutral-background-weak {
+    display: flex;
+    flex-direction: row;
+    width: 630px;
+    height: 82px;
+    border: 1px solid rgb(212, 210, 210);
+    border-radius: 11px;
+    background-color: #F9FAFA;
+    margin-top: 68px;
+    margin-left: 110px;
+}
+
+.text{
+    flex-direction: column;
+}
+.bg-neutral-background-weak img{
+margin-left: 36px;
+}
+
+.text-neutral-content{
   
+    margin-left: 25px;
+    margin-top: 17px;
+}
+
+.text-second-line{
+    font-size: .875rem;
+    line-height: 1.25rem;
+    padding-left: 21px;
+    color: rgb(141, 137, 137);
+}
