@@ -73,9 +73,7 @@ const SignIn = () => {
         } else {
           setError("");
           localStorage.setItem("jwt", json.token);
-          console.log("JWT Token:", json.token);
           const userName = json.data.name;
-          console.log("username", userName);
           setUserName(userName);
           setLogin(true);
           const userPhotoUrl =

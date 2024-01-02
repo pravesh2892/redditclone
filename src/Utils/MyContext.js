@@ -26,11 +26,15 @@ const over_lay = {
 };
 const MyProvider = ({ children }) => {
   const [update, setUpdate] = useState([]);
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(
+    localStorage.getItem("loggedIn") === "true"
+  );
   const [top, setTop] = useState(true);
   const [newPost, setNewPost] = useState(false);
   const [showForm, setShowForm] = useState("none");
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState(
+    localStorage.getItem("loggedInUser") || ""
+  );
   const [postItem, setPostItem] = useState({});
   const [id, setId] = useState(0);
   const [userPhoto, setUserPhoto] = useState();
@@ -51,6 +55,16 @@ const MyProvider = ({ children }) => {
   const [userId, setUserId] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+
+  const updateLoginState = (value) => {
+    setLogin(value);
+    localStorage.setItem("loggedIn", value);
+  };
+
+  const updateUserName = (name) => {
+    setUserName(name);
+    localStorage.setItem("loggedInUser", name);
+  };
   return (
     <MyContext.Provider
       value={{
@@ -61,7 +75,7 @@ const MyProvider = ({ children }) => {
         update,
         setUpdate,
         login,
-        setLogin,
+        setLogin: updateLoginState,
         showForm,
         setShowForm,
         theme,
@@ -69,7 +83,7 @@ const MyProvider = ({ children }) => {
         newPost,
         setNewPost,
         userName,
-        setUserName,
+        setUserName: updateUserName,
         postItem,
         setPostItem,
         allComment,

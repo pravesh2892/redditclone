@@ -142,7 +142,7 @@ const Feed = ({ fed, removePost }) => {
       return;
     }
     if (!liked) {
-      fetch(`https://academics.newtonschool.co/api/v1/reddit/like/${fed?._id}`, {
+      fetch(`https://academics.newtonschool.co/api/v1/reddit/like/${fed._id}`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -152,8 +152,8 @@ const Feed = ({ fed, removePost }) => {
       .then((response) => {
         if (response.ok) {
           if (disliked) {
-            setDisliked(false); // Remove dislike if it was already disliked
-            setLikeCount(likeCount + 1); // Increase like count after removing dislike
+            setDisliked(false); 
+            setLikeCount(likeCount + 1); 
           }
           setLiked(true);
           setLikeColor("#D93A00");
@@ -165,7 +165,7 @@ const Feed = ({ fed, removePost }) => {
       })
       .catch((error) => {
         console.error("Error upvoting post:", error.message);
-        // Handle error cases or show appropriate message to the user
+        
       });
     }
   };
@@ -177,7 +177,7 @@ const Feed = ({ fed, removePost }) => {
       return;
     }
     if (!disliked) {
-      fetch(`https://academics.newtonschool.co/api/v1/reddit/like/${fed?._id}`, {
+      fetch(`https://academics.newtonschool.co/api/v1/reddit/like/${fed._id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -205,6 +205,8 @@ const Feed = ({ fed, removePost }) => {
       });
     }
   };
+
+
 
   return (
     <div className="feed" key={fed?._id}>
