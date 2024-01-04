@@ -152,8 +152,12 @@ const Feed = ({ fed, removePost }) => {
       .then((response) => {
         if (response.ok) {
           if (disliked) {
-            setDisliked(false); 
-            setLikeCount(likeCount + 2); // Increase by 2 when switching from dislike to like
+            setDisliked(false);
+            if (likeCount === 0) {
+              setLikeCount(1); // Increase to 1 from 0 when switching from dislike to like
+            } else {
+              setLikeCount(likeCount + 2); // Increase by 2 when switching from dislike to like
+            }
           } else {
             setLikeCount(likeCount + 1); // Increase by 1 on initial like
           }
@@ -187,10 +191,14 @@ const Feed = ({ fed, removePost }) => {
       .then((response) => {
         if (response.ok) {
           if (liked) {
-            setLiked(false); 
-            setLikeCount(likeCount - 2); // Decrease by 2 when switching from like to dislike
+            setLiked(false);
+            if (likeCount === 1) {
+              setLikeCount(0); // Decrease to 0 from 1 when switching from like to dislike
+            } else {
+              setLikeCount(Math.max(0, likeCount - 2)); // Decrease by 2 when switching from like to dislike
+            }
           } else {
-            setLikeCount(likeCount - 1); // Decrease by 1 on initial dislike
+            setLikeCount(Math.max(0, likeCount - 1)); // Decrease by 1 on initial dislike
           }
           setDisliked(true);
           setLiked(false);

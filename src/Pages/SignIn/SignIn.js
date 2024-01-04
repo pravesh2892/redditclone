@@ -154,9 +154,7 @@ const SignIn = () => {
               ),
             }}
           />
-          <p>
-            Forgot your <a href="">username</a> or <a href="">password</a>?
-          </p>
+         
           <button onClick={postData} className="login-button">
             Login
           </button>
