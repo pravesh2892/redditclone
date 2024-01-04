@@ -71,6 +71,11 @@ const PostText = () => {
       });
     }
   };
+
+  const isDataEntered = () => {
+    return textValue.trim().length > 0 || image;
+  };
+
   return (
     <div className="reddit_clone-post_type">
       <div className="reddit_clone-post_image">
@@ -98,18 +103,33 @@ const PostText = () => {
         }}
       ></textarea>
 
-      <div className="reddit_clone-post_type_save">
-        <button
-          onClick={(e) => addPost(e)}
-          style={{
-            backgroundColor: "#0079D3",
-            borderColor: "#0079D3",
-            color: "white",
-          }}
-        >
-          Post
-        </button>
-      </div>
+     {isDataEntered() ? (
+        <div className="reddit_clone-post_type_save">
+          <button
+            onClick={(e) => addPost(e)}
+            style={{
+              backgroundColor: "#0079D3",
+              borderColor: "#0079D3",
+              color: "white",
+            }}
+          >
+            Post
+          </button>
+        </div>
+      ) : (
+        <div className="reddit_clone-post_type_save">
+          <button
+            disabled
+            style={{
+              backgroundColor: "#dddddd",
+              borderColor: "#dddddd",
+              color: "#888888",
+            }}
+          >
+            Add text or image to post
+          </button>
+        </div>
+      )}
       <div className="reddit_clone-post_type_notification">
         <div className="reddit_clone-post_type_checkbox">
           <input type="checkbox" id="notification" checked />
