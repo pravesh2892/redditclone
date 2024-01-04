@@ -4,18 +4,8 @@ import { MyContext } from "../../Utils/MyContext";
 import "./PostText.css";
 import { ToastContainer, toast } from "react-toastify";
 
-
 const PostText = () => {
-  const {
-    update,
-    setUpdate,
-    setNewPost,
-    userName,
-    userPhoto,
-    login,
-    userId,
-    setLoading,
-  } = useContext(MyContext);
+  const { userName, userPhoto } = useContext(MyContext);
   const [textValue, setTextValue] = useState("");
   const [image, setImage] = useState();
   const [imageURL, setImageURL] = useState();
@@ -34,35 +24,34 @@ const PostText = () => {
   };
   const addPost = async (e) => {
     e.preventDefault();
-  
+
     const token = localStorage.getItem("jwt");
     const myHeaders = new Headers();
     myHeaders.append("projectID", "f104bi07c480");
     myHeaders.append("Authorization", "Bearer " + token);
-  
-    
+
     if (userPhoto) {
-      myHeaders.append("userPhoto", userPhoto); 
+      myHeaders.append("profileImage", userPhoto);
     }
-  
+
     const formdata = new FormData();
     formdata.append("content", textValue);
     formdata.append("images", image);
     console.log("image", image);
-  
+
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
       body: formdata,
     };
-  
+
     try {
       const response = await fetch(
         "https://academics.newtonschool.co/api/v1/reddit/post",
         requestOptions
       );
       const res = await response.json();
-  
+
       if (res.status === "success") {
         setTextValue("");
         setImage(null);
@@ -84,41 +73,41 @@ const PostText = () => {
   };
   return (
     <div className="reddit_clone-post_type">
-     
-     
-        <div className="reddit_clone-post_image">
-          {image ? (
-            <div>
-              <img src={image} style={{ maxWidth: "50%" }}></img>
-            </div>
-          ) : (
-            <div>
-              <button onClick={() => inpRef.current.click()}> Upload</button>
-              <input type="file" onChange={handleImageChange} ref={inpRef} />
-            </div>
-          )}
-        </div>
-    
+      <div className="reddit_clone-post_image">
+        {image ? (
+          <div>
+            <img src={image} style={{ maxWidth: "50%" }}></img>
+          </div>
+        ) : (
+          <div>
+            <button onClick={() => inpRef.current.click()}> Upload</button>
+            <input type="file" onChange={handleImageChange} ref={inpRef} />
+          </div>
+        )}
+      </div>
+
       <textarea
         name="textArea"
         id=""
         cols="30"
-        rows= "5" 
-       
+        rows="5"
         value={textValue}
-          onChange={(e) => {
-            e.preventDefault();
-            setTextValue(e.target.value);
-          }}
+        onChange={(e) => {
+          e.preventDefault();
+          setTextValue(e.target.value);
+        }}
       ></textarea>
-      
+
       <div className="reddit_clone-post_type_save">
-       
         <button
-           onClick={(e) => addPost(e)}
-          style={{backgroundColor: "#0079D3", borderColor: "#0079D3", color: "white",}}  
-        > 
-        Post
+          onClick={(e) => addPost(e)}
+          style={{
+            backgroundColor: "#0079D3",
+            borderColor: "#0079D3",
+            color: "white",
+          }}
+        >
+          Post
         </button>
       </div>
       <div className="reddit_clone-post_type_notification">
@@ -127,7 +116,8 @@ const PostText = () => {
           <label htmlFor="notification">Send me post reply notifications</label>
         </div>
         <p>
-          Connect Accounts to share your post <GrCircleInformation style={{color:"black"}}/>
+          Connect Accounts to share your post{" "}
+          <GrCircleInformation style={{ color: "black" }} />
         </p>
       </div>
       <ToastContainer
@@ -147,6 +137,3 @@ const PostText = () => {
 };
 
 export default PostText;
-
-
-

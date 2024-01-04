@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import "./feeds.css";
-import { BsSave, BsTrash  } from "react-icons/bs";
+import { BsSave, BsTrash } from "react-icons/bs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MyContext } from "../../Utils/MyContext";
@@ -12,6 +12,8 @@ const Feed = ({ fed, removePost }) => {
   const [dislikeColor, setDislikeColor] = useState("#e6e6e6");
   const {
     login,
+    userName,
+    userPhoto,
     setLogin,
     setShowForm,
     theme,
@@ -21,14 +23,13 @@ const Feed = ({ fed, removePost }) => {
     setUserId,
   } = useContext(MyContext);
   const [openComment, setOpenComment] = useState(false);
-  // const [likeCount, setLikeCount] = useState(Math.floor(Math.random() * 1000));
   const [likeCount, setLikeCount] = useState(fed?.likeCount);
   const [liked, setLiked] = useState(false);
   const [disliked, setDisliked] = useState(false);
   const navigate = useNavigate();
   const commentBoxRef = useRef(null);
   const token = localStorage.getItem("jwt");
-  
+
   const handleShare = (e) => {
     if (!login) {
       navigate("/signin");
@@ -78,36 +79,33 @@ const Feed = ({ fed, removePost }) => {
       navigate("/signin");
       return;
     }
-  
+
     fetch(`https://academics.newtonschool.co/api/v1/reddit/post/${fed?._id}`, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Authorization': `Bearer ${token}`,
-        'projectID': "f104bi07c480"
-      }
+        Authorization: `Bearer ${token}`,
+        projectID: "f104bi07c480",
+      },
     })
-    .then((response) => {
-      if (response.ok) {
-        toast.success("Post deleted successfully", {
-          position: toast.POSITION.TOP_CENTER,
-          progress: undefined,
-          hideProgressBar: false,
-          theme: "light",
-        });
-        removePost(fed._id);
-      } else {
-        return response.json().then((errorData) => {
-          throw new Error(errorData.message || 'Failed to delete post');
-        });
-      }
-    })
-    .catch((error) => {
-      console.error("Error deleting post:", error.message);
-     
-    });
+      .then((response) => {
+        if (response.ok) {
+          toast.success("Post deleted successfully", {
+            position: toast.POSITION.TOP_CENTER,
+            progress: undefined,
+            hideProgressBar: false,
+            theme: "light",
+          });
+          removePost(fed._id);
+        } else {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.message || "Failed to delete post");
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting post:", error.message);
+      });
   };
-  
-  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -143,37 +141,37 @@ const Feed = ({ fed, removePost }) => {
     }
     if (!liked) {
       fetch(`https://academics.newtonschool.co/api/v1/reddit/like/${fed._id}`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'projectID': "f104bi07c480"
-        }
+          Authorization: `Bearer ${token}`,
+          projectID: "f104bi07c480",
+        },
       })
-      .then((response) => {
-        if (response.ok) {
-          if (disliked) {
-            setDisliked(false);
-            if (likeCount === 0) {
-              setLikeCount(1); // Increase to 1 from 0 when switching from dislike to like
+        .then((response) => {
+          if (response.ok) {
+            if (disliked) {
+              setDisliked(false);
+              if (likeCount === 0) {
+                setLikeCount(1);
+              } else {
+                setLikeCount(likeCount + 2);
+              }
             } else {
-              setLikeCount(likeCount + 2); // Increase by 2 when switching from dislike to like
+              setLikeCount(likeCount + 1);
             }
+            setLiked(true);
+            setLikeColor("#D93A00");
+            setDislikeColor("#e6e6e6");
           } else {
-            setLikeCount(likeCount + 1); // Increase by 1 on initial like
+            throw new Error("Failed to upvote post");
           }
-          setLiked(true);
-          setLikeColor("#D93A00");
-          setDislikeColor("#e6e6e6");
-        } else {
-          throw new Error('Failed to upvote post');
-        }
-      })
-      .catch((error) => {
-        console.error("Error upvoting post:", error.message);
-      });
+        })
+        .catch((error) => {
+          console.error("Error upvoting post:", error.message);
+        });
     }
   };
-  
+
   const handleDislike = (e) => {
     e.stopPropagation();
     if (!login) {
@@ -182,51 +180,57 @@ const Feed = ({ fed, removePost }) => {
     }
     if (!disliked) {
       fetch(`https://academics.newtonschool.co/api/v1/reddit/like/${fed._id}`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'projectID': "f104bi07c480"
-        }
+          Authorization: `Bearer ${token}`,
+          projectID: "f104bi07c480",
+        },
       })
-      .then((response) => {
-        if (response.ok) {
-          if (liked) {
-            setLiked(false);
-            if (likeCount === 1) {
-              setLikeCount(0); // Decrease to 0 from 1 when switching from like to dislike
+        .then((response) => {
+          if (response.ok) {
+            if (liked) {
+              setLiked(false);
+              if (likeCount === 1) {
+                setLikeCount(0);
+              } else {
+                setLikeCount(Math.max(0, likeCount - 2));
+              }
             } else {
-              setLikeCount(Math.max(0, likeCount - 2)); // Decrease by 2 when switching from like to dislike
+              setLikeCount(Math.max(0, likeCount - 1));
             }
+            setDisliked(true);
+            setLiked(false);
+            setLikeColor("#6A5CFF");
+            setDislikeColor("#6A5CFF");
           } else {
-            setLikeCount(Math.max(0, likeCount - 1)); // Decrease by 1 on initial dislike
+            throw new Error("Failed to downvote post");
           }
-          setDisliked(true);
-          setLiked(false);
-          setLikeColor("#6A5CFF");
-          setDislikeColor("#6A5CFF");
-        } else {
-          throw new Error('Failed to downvote post');
-        }
-      })
-      .catch((error) => {
-        console.error("Error downvoting post:", error.message);
-      });
+        })
+        .catch((error) => {
+          console.error("Error downvoting post:", error.message);
+        });
     }
   };
-  
-
 
   return (
     <div className="feed" key={fed?._id}>
       <div className="top-content">
         <div className="user">
-          <img src={fed?.author?.profileImage} alt="" />
+          {fed?.author?.profileImage ? (
+            <img src={fed?.author?.profileImage} alt="" />
+          ) : (
+            <img 
+            style={{ height: "45px" }}
+            src="https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png" alt="" />
+          )}
           <div>
             <h4 style={{ paddingTop: "7px" }}>r/{fed?.author?.name}</h4>
           </div>
-          <div className="delete-btn" onClick={handleDeletePost}>
-        <BsTrash />
-      </div>
+          {fed?.author?.name === userName && (
+            <div className="delete-btn" onClick={handleDeletePost}>
+              <BsTrash />
+            </div>
+          )}
         </div>
       </div>
       <div className="mid-content">
@@ -291,14 +295,17 @@ const Feed = ({ fed, removePost }) => {
             viewBox="0 0 20 20"
             width="20"
             xmlns="http://www.w3.org/2000/svg"
-            style={{ position: 'relative', top: '3px', left: '5px' }}
+            style={{ position: "relative", top: "3px", left: "5px" }}
           >
             <path d="M19 11v5.378A2.625 2.625 0 0 1 16.378 19H3.622A2.625 2.625 0 0 1 1 16.378V11h1.25v5.378a1.373 1.373 0 0 0 1.372 1.372h12.756a1.373 1.373 0 0 0 1.372-1.372V11H19ZM9.375 3.009V14h1.25V3.009l2.933 2.933.884-.884-4-4a.624.624 0 0 0-.884 0l-4 4 .884.884 2.933-2.933Z"></path>{" "}
           </svg>
           <span>Share</span>
         </div>
         <div className="action-item save-btn">
-          <span onClick={handleSave} style={{paddingTop:"5px", paddingLeft:"5px"}}>
+          <span
+            onClick={handleSave}
+            style={{ paddingTop: "5px", paddingLeft: "5px" }}
+          >
             <BsSave /> Save
           </span>
         </div>
