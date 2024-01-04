@@ -153,23 +153,23 @@ const Feed = ({ fed, removePost }) => {
         if (response.ok) {
           if (disliked) {
             setDisliked(false); 
-            setLikeCount(likeCount + 1); 
+            setLikeCount(likeCount + 2); // Increase by 2 when switching from dislike to like
+          } else {
+            setLikeCount(likeCount + 1); // Increase by 1 on initial like
           }
           setLiked(true);
           setLikeColor("#D93A00");
           setDislikeColor("#e6e6e6");
-          setLikeCount(likeCount + 1);
         } else {
           throw new Error('Failed to upvote post');
         }
       })
       .catch((error) => {
         console.error("Error upvoting post:", error.message);
-        
       });
     }
   };
-
+  
   const handleDislike = (e) => {
     e.stopPropagation();
     if (!login) {
@@ -188,24 +188,24 @@ const Feed = ({ fed, removePost }) => {
         if (response.ok) {
           if (liked) {
             setLiked(false); 
-            setLikeCount(likeCount - 1); 
+            setLikeCount(likeCount - 2); // Decrease by 2 when switching from like to dislike
+          } else {
+            setLikeCount(likeCount - 1); // Decrease by 1 on initial dislike
           }
           setDisliked(true);
           setLiked(false);
           setLikeColor("#6A5CFF");
           setDislikeColor("#6A5CFF");
-          setLikeCount(likeCount - 1);
         } else {
           throw new Error('Failed to downvote post');
         }
       })
       .catch((error) => {
         console.error("Error downvoting post:", error.message);
-       
       });
     }
   };
-
+  
 
 
   return (
