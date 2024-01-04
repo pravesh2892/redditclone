@@ -53,8 +53,7 @@
     gap: 5px;
   }
   .user img{
-    max-width: 21%;
-    max-height: 76%;
+    height: 45px;
     border: 1px solid rgb(134, 134, 134);
     border-radius: 50%;
   }
