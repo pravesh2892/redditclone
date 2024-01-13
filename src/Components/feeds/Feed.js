@@ -107,10 +107,12 @@ const Feed = ({ fed, removePost }) => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+    setLikeColor(fed?.isLiked ? "#D93A00" : "#0F1A1C");
+    setDislikeColor(fed?.isDisliked ? "#6A5CFF" : "#0F1A1C");
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  },[fed]);
 
   const commentHandler = (e) => {
     e.stopPropagation();

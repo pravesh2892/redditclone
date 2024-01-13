@@ -9,6 +9,7 @@ import {
   BsQuestionLg,
   BsShield,
 } from "react-icons/bs";
+import { FaRegCircleUser } from "react-icons/fa6";
 import { MdOutlineCancel } from "react-icons/md";
 import { CiCircleMore, CiCoinInsert } from "react-icons/ci";
 import { FaReddit } from "react-icons/fa";
@@ -40,6 +41,9 @@ const Option = () => {
 
   return (
     <div className="reddit_clone-nav_option">
+      <button className="no-hover-effect" style={{textDecoration:"none", cursor:"auto", color:"#878A8C"}}>
+      <FaRegCircleUser /> My Stuff  
+      </button>
       <button
         onClick={() => {
           navigate("/coins");

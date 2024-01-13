@@ -9,9 +9,14 @@
   pointer-events: none;
 }
 
-.reddit_clone-app {
+.reddit_clone-app-after-login {
   width: 100%;
   background-color: #dadada;
+}
+
+.reddit_clone-app-before-login{
+  width: 100%;
+  background-color: rgb(255, 255, 255);
 }
 .reddit_clone-app_create_post {
   width: 100%;

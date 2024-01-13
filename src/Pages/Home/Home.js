@@ -9,9 +9,12 @@ import { MyContext } from "../../Utils/MyContext";
 
 function Home() {
   const { login} = useContext(MyContext);
-
+  
+  const containerClass = login
+  ? "reddit_clone-app-after-login"
+  : "reddit_clone-app-before-login";
   return (
-    <div className="reddit_clone-app">
+    <div className={containerClass}>
       <div className="reddit_clone-app_right_section">
         <Rightbar />
       </div>
