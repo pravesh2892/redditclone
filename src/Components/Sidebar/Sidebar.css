@@ -29,6 +29,8 @@
     background-color: #ffffff;
     font-family: "Signika Negative", sans-serif;
     color: #0F1A1C;
+    padding-top: 7px;
+    padding-bottom: 9px;
   }
   .reddit_clone-nav_menu_item button:hover {
     background-color: rgba(218, 224, 230, 0.5);

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./feeds.css";
 import Feed from "./Feed";
 import Stick from "../../Pages/Popular/Stick";
+import { MyContext } from "../../Utils/MyContext";
 
-const Feeds = ({ showStick = true }) => {
+const Feeds = () => {
+  const { login } = useContext(MyContext);
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [filter, setFilter] = useState("");
@@ -32,7 +34,7 @@ const Feeds = ({ showStick = true }) => {
   const removePost = (postId) => {
     const updatedPosts = posts.filter((post) => post._id !== postId);
     setPosts(updatedPosts);
-    setFilteredPosts(updatedPosts); 
+    setFilteredPosts(updatedPosts);
   };
 
   const shuffleArray = (array) => {
@@ -53,7 +55,7 @@ const Feeds = ({ showStick = true }) => {
     let filtered = [];
 
     if (type === 'Hot' || type === 'New' || type === 'Top') {
-      filtered = shuffleArray(posts).slice(0, 10); 
+      filtered = shuffleArray(posts).slice(0, 10);
     }
 
     setFilteredPosts(filtered);
@@ -61,7 +63,7 @@ const Feeds = ({ showStick = true }) => {
 
   return (
     <div>
-      {showStick && (
+      {login && (
         <Stick
           filterHot={() => filterPosts("Hot")}
           filterNew={() => filterPosts("New")}

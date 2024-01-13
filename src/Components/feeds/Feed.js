@@ -8,24 +8,13 @@ import { Link, useNavigate } from "react-router-dom";
 import Comments from "../Comment/Comment";
 
 const Feed = ({ fed, removePost }) => {
-  const [likeColor, setLikeColor] = useState("#e6e6e6");
-  const [dislikeColor, setDislikeColor] = useState("#e6e6e6");
-  const {
-    login,
-    userName,
-    userPhoto,
-    setLogin,
-    setShowForm,
-    theme,
-    setTheme,
-    setNavMenu,
-    userId,
-    setUserId,
-  } = useContext(MyContext);
+  const [likeColor, setLikeColor] = useState("#0F1A1C");
+  const [dislikeColor, setDislikeColor] = useState("#0F1A1C");
+  const { login, userName } = useContext(MyContext);
   const [openComment, setOpenComment] = useState(false);
   const [likeCount, setLikeCount] = useState(fed?.likeCount);
-  const [liked, setLiked] = useState(false);
-  const [disliked, setDisliked] = useState(false);
+  const [liked, setLiked] = useState(fed?.isLiked || false);
+  const [disliked, setDisliked] = useState(fed?.isDisliked || false);
   const navigate = useNavigate();
   const commentBoxRef = useRef(null);
   const token = localStorage.getItem("jwt");
@@ -160,8 +149,7 @@ const Feed = ({ fed, removePost }) => {
               setLikeCount(likeCount + 1);
             }
             setLiked(true);
-            setLikeColor("#D93A00");
-            setDislikeColor("#e6e6e6");
+          
           } else {
             throw new Error("Failed to upvote post");
           }
@@ -200,8 +188,7 @@ const Feed = ({ fed, removePost }) => {
             }
             setDisliked(true);
             setLiked(false);
-            setLikeColor("#6A5CFF");
-            setDislikeColor("#6A5CFF");
+          
           } else {
             throw new Error("Failed to downvote post");
           }
@@ -215,13 +202,44 @@ const Feed = ({ fed, removePost }) => {
   return (
     <div className="feed" key={fed?._id}>
       <div className="top-content">
+        <div className="vote-like" >
+          <div className="action-item like-btn" onClick={handleLike} >
+            <svg
+              rpl=""
+              fill="currentColor"
+              height="17"
+              icon-name="upvote-outline"
+              viewBox="0 0 20 20"
+              width="17"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M12.877 19H7.123A1.125 1.125 0 0 1 6 17.877V11H2.126a1.114 1.114 0 0 1-1.007-.7 1.249 1.249 0 0 1 .171-1.343L9.166.368a1.128 1.128 0 0 1 1.668.004l7.872 8.581a1.25 1.25 0 0 1 .176 1.348 1.113 1.113 0 0 1-1.005.7H14v6.877A1.125 1.125 0 0 1 12.877 19ZM7.25 17.75h5.5v-8h4.934L10 1.31 2.258 9.75H7.25v8ZM2.227 9.784l-.012.016c.01-.006.014-.01.012-.016Z"></path>{" "}
+            </svg>
+          </div>
+          {likeCount}
+          <div className="action-item dislike-btn" onClick={handleDislike}>
+            <svg
+              rpl=""
+              fill="currentColor"
+              height="17"
+              icon-name="downvote-outline"
+              viewBox="0 0 20 20"
+              width="17"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M10 20a1.122 1.122 0 0 1-.834-.372l-7.872-8.581A1.251 1.251 0 0 1 1.118 9.7 1.114 1.114 0 0 1 2.123 9H6V2.123A1.125 1.125 0 0 1 7.123 1h5.754A1.125 1.125 0 0 1 14 2.123V9h3.874a1.114 1.114 0 0 1 1.007.7 1.25 1.25 0 0 1-.171 1.345l-7.876 8.589A1.128 1.128 0 0 1 10 20Zm-7.684-9.75L10 18.69l7.741-8.44H12.75v-8h-5.5v8H2.316Zm15.469-.05c-.01 0-.014.007-.012.013l.012-.013Z"></path>{" "}
+            </svg>
+          </div>
+        </div>
         <div className="user">
           {fed?.author?.profileImage ? (
             <img src={fed?.author?.profileImage} alt="" />
           ) : (
-            <img 
-            style={{ height: "45px" }}
-            src="https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png" alt="" />
+            <img
+              style={{ height: "45px" }}
+              src="https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png"
+              alt=""
+            />
           )}
           <div>
             <h4 style={{ paddingTop: "7px" }}>r/{fed?.author?.name}</h4>
@@ -238,35 +256,6 @@ const Feed = ({ fed, removePost }) => {
         <img src={fed?.channel?.image} alt="" />
       </div>
       <div className="bottom-content">
-        <div className="vote-like" style={{ backgroundColor: likeColor }}>
-          <div className="action-item" onClick={handleLike}>
-            <svg
-              rpl=""
-              fill="currentColor"
-              height="16"
-              icon-name="upvote-outline"
-              viewBox="0 0 20 20"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M12.877 19H7.123A1.125 1.125 0 0 1 6 17.877V11H2.126a1.114 1.114 0 0 1-1.007-.7 1.249 1.249 0 0 1 .171-1.343L9.166.368a1.128 1.128 0 0 1 1.668.004l7.872 8.581a1.25 1.25 0 0 1 .176 1.348 1.113 1.113 0 0 1-1.005.7H14v6.877A1.125 1.125 0 0 1 12.877 19ZM7.25 17.75h5.5v-8h4.934L10 1.31 2.258 9.75H7.25v8ZM2.227 9.784l-.012.016c.01-.006.014-.01.012-.016Z"></path>{" "}
-            </svg>
-          </div>
-          {likeCount}
-          <div className="action-item" onClick={handleDislike}>
-            <svg
-              rpl=""
-              fill="currentColor"
-              height="16"
-              icon-name="downvote-outline"
-              viewBox="0 0 20 20"
-              width="16"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M10 20a1.122 1.122 0 0 1-.834-.372l-7.872-8.581A1.251 1.251 0 0 1 1.118 9.7 1.114 1.114 0 0 1 2.123 9H6V2.123A1.125 1.125 0 0 1 7.123 1h5.754A1.125 1.125 0 0 1 14 2.123V9h3.874a1.114 1.114 0 0 1 1.007.7 1.25 1.25 0 0 1-.171 1.345l-7.876 8.589A1.128 1.128 0 0 1 10 20Zm-7.684-9.75L10 18.69l7.741-8.44H12.75v-8h-5.5v8H2.316Zm15.469-.05c-.01 0-.014.007-.012.013l.012-.013Z"></path>{" "}
-            </svg>
-          </div>
-        </div>
         <div className="action-item comment-btn" onClick={commentHandler}>
           <svg
             rpl=""
@@ -301,6 +290,7 @@ const Feed = ({ fed, removePost }) => {
           </svg>
           <span>Share</span>
         </div>
+
         <div className="action-item save-btn">
           <span
             onClick={handleSave}
@@ -328,4 +318,6 @@ const Feed = ({ fed, removePost }) => {
     </div>
   );
 };
+
 export default Feed;
+
