@@ -70,7 +70,7 @@ const Option = () => {
       </button>
       {login && ( 
         <button onClick={handleLogout}>
-          <IoIosLogOut /> LogOut
+          <IoIosLogOut /> Log Out
         </button>
       )}
     </div>
@@ -385,7 +385,7 @@ const Navbar = () => {
                 <BsQrCodeScan /> Get App
               </button>
               <button className="reddit_clone-nav_login" onClick={handleLogin}>
-                <BiLogIn /> Login
+                Log in
               </button>
               <div
                 className="reddit_Clone-nav_before_login"
@@ -393,7 +393,7 @@ const Navbar = () => {
                 ref={optionRef}
               >
                 <HiDotsHorizontal className="reddit_clone-contact_icon" />
-                {/* <BsChevronDown /> */}
+        
                 {option && <Option />}
               </div>
             </div>
