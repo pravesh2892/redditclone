@@ -6,6 +6,7 @@ import { MyContext } from "../../Utils/MyContext";
 const Comments = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState();
+  const [deletedCommentId, setDeletedCommentId] = useState(null); 
   const { userName } = useContext(MyContext);
 
   var key = "content";
@@ -43,7 +44,7 @@ const Comments = ({ postId }) => {
       }
     };
     fetchComments();
-  }, [postId]);
+  }, [postId, deletedCommentId]); 
 
   const commentSend = async () => {
     try {
@@ -109,9 +110,9 @@ const Comments = ({ postId }) => {
           },
         }
       );
-  
+
       if (response.ok) {
-       
+        setDeletedCommentId(commentId); // Set deletedCommentId to trigger useEffect
         toast.success("Comment deleted successfully", {
           position: toast.POSITION.TOP_CENTER,
         });
@@ -128,7 +129,6 @@ const Comments = ({ postId }) => {
       });
     }
   };
-  
   
   return (
     <div className="comments" key={postId}>
