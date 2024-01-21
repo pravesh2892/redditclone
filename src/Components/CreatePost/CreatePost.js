@@ -22,9 +22,9 @@ const CreatePost = () => {
         </div>
       </div>
       <div className="reddit_clone-create_post_line"></div>
-      <select name="" id="" className="reddit_clone-create_post_select">
-        <option value="">User</option>
-      </select>
+      <div name="" id="" className="reddit_clone-create_post_select">
+        <div value="">User</div>
+      </div>
      
       <div className="reddit_clone-create_post">
         <div className="reddit_clone-create_post_links">

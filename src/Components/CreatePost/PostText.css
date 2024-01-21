@@ -8,9 +8,9 @@
   .reddit_clone-post_type input {
     font-weight: 400;
     font-size: 1.1rem;
-    margin: 0.25rem;
+   
     width: 100%;
-    padding: 0.5rem;
+ 
     font-family: "Signika Negative", sans-serif;
     border-radius: 0.2rem;
     border: 1px solid #343536;
@@ -93,7 +93,7 @@
   .reddit_clone-post_image {
     width: 100%;
     /* padding: 0 1rem 0 0; */
-    margin: 2rem auto;
+    margin: 0rem auto;
     text-align: center;
     /* margin: ; */
     /* background-color: var(--color-inp); */

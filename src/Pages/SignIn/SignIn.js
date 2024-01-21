@@ -4,6 +4,7 @@ import { Alert } from "react-bootstrap";
 import { TextField, Button, IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import { MyContext } from "../../Utils/MyContext";
 import "./SignIn.css";
 
@@ -100,7 +101,7 @@ const SignIn = () => {
   return (
     <div className="reddit_clone-login">
       <div className="reddit_clone-login_close">
-        <button onClick={handleClosepage}>X</button>
+        <IoIosCloseCircleOutline onClick={handleClosepage}/>
       </div>
       <div className="reddit_clone-login_container">
         <div className="reddit_clone-login_heading">

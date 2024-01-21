@@ -7,7 +7,7 @@
     align-items: center;
     justify-content: space-between;
     padding-top: 58px;
-    margin: 0rem 0px 0rem 297px;
+    margin: 0rem 0px 0rem 286px;
     width: 48%;
 
   }
@@ -22,7 +22,7 @@
   .reddit_clone-create_post_head div {
     font-family: "Signika Negative", sans-serif;
     border: none;
-    width: 22%;
+    width: 12%;
     background-color: #dae0e6;
     font-weight: bold;
     color: #0079ff;
@@ -70,7 +70,7 @@
     margin: 0.5rem 0;
     background-color: white;
     color: #0c0c0c;
-    margin-left: 290px;
+    margin-left: 285px;
   }
   
   .reddit_clone-create_post_links > * {

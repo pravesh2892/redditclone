@@ -12,16 +12,16 @@
     border: 1px solid black;
   }
   
-  .reddit_clone-login_close button {
+  .reddit_clone-login_close  {
     margin-top: 14px;
     margin-left: 419px;
     padding: 0.5rem;
-    font-size: 1.2rem;
-    background-color: #d8dbd8;
+    font-size: 23px;
+  
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    color: white;
+    color: black;
   }
   
   .reddit_clone-login_container {
