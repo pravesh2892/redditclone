@@ -1,19 +1,13 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import "./Comment.css";
 import { toast } from "react-toastify";
 import { MyContext } from "../../Utils/MyContext";
 
 const Comments = ({ postId }) => {
   const [comments, setComments] = useState([]);
-  const [commentText, setCommentText] = useState();
-  const [deletedCommentId, setDeletedCommentId] = useState(null); 
+  const [commentText, setCommentText] = useState("");
+  const [deletedCommentId, setDeletedCommentId] = useState(null);
   const { userName } = useContext(MyContext);
-
-  var key = "content";
-
-  var obj = {};
-
-  obj[key] = commentText;
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -44,35 +38,35 @@ const Comments = ({ postId }) => {
       }
     };
     fetchComments();
-  }, [postId, deletedCommentId]); 
+  }, [postId, deletedCommentId]);
 
   const commentSend = async () => {
     try {
       const token = localStorage.getItem("jwt");
       const myHeaders = new Headers();
-      myHeaders.append("projectID", "f104bi07c490");
+      myHeaders.append("projectID", "f104bi07c480");
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("Authorization", "Bearer " + token);
-  
+
       const raw = JSON.stringify({
         content: commentText,
       });
-  
+
       const requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: raw,
         redirect: "follow",
       };
-  
+
       const response = await fetch(
         `https://academics.newtonschool.co/api/v1/reddit/comment/${postId}`,
         requestOptions
       );
-  
+
       if (response.ok) {
         const responseData = await response.json();
-        const newCommentId = responseData.data.id; // Capture the new comment ID
+        const newCommentId = responseData.data.id;
         const newComment = {
           id: newCommentId,
           userName: userName,
@@ -84,7 +78,7 @@ const Comments = ({ postId }) => {
         toast.success(responseData.message, {
           position: toast.POSITION.TOP_CENTER,
         });
-  
+
         // Set deletedCommentId using the new comment ID
         setDeletedCommentId(newCommentId);
       } else {
@@ -100,7 +94,7 @@ const Comments = ({ postId }) => {
       });
     }
   };
-  
+
   const deleteComment = async (commentId) => {
     try {
       const token = localStorage.getItem("jwt");
@@ -114,12 +108,14 @@ const Comments = ({ postId }) => {
           },
         }
       );
-
+  
       if (response.ok) {
-        setDeletedCommentId(commentId); // Set deletedCommentId to trigger useEffect
         toast.success("Comment deleted successfully", {
           position: toast.POSITION.TOP_CENTER,
         });
+  
+        // Reset deletedCommentId after successful deletion
+        setDeletedCommentId(null);
       } else {
         const errorRes = await response.json();
         toast.error(errorRes.message, {
@@ -133,7 +129,61 @@ const Comments = ({ postId }) => {
       });
     }
   };
-  
+
+  const editComment = async (commentId, updatedComment) => {
+    try {
+      const token = localStorage.getItem("jwt");
+      const myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + token);
+      myHeaders.append("projectID", "f104bi07c480");
+      myHeaders.append("Content-Type", "application/json");
+
+      const raw = JSON.stringify({
+        content: updatedComment,
+      });
+
+      const requestOptions = {
+        method: "PATCH",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/reddit/comment/${commentId}`,
+        requestOptions
+      );
+
+      if (response.ok) {
+        const responseData = await response.json();
+        toast.success(responseData.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+
+        // Trigger a refetch of comments after editing
+        setDeletedCommentId(commentId);
+      } else {
+        const errorRes = await response.json();
+        toast.error(errorRes.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    } catch (error) {
+      console.error("Error editing comment: ", error);
+      toast.error("Failed to edit comment", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
+
+  const handleEditComment = (commentId, currentContent) => {
+    const updatedComment = prompt("Edit your comment:", currentContent);
+
+    if (updatedComment !== null) {
+      editComment(commentId, updatedComment);
+    }
+  };
+
   return (
     <div className="comments" key={postId}>
       <div className="writebox">
@@ -181,7 +231,12 @@ const Comments = ({ postId }) => {
               minute: "2-digit",
             })}
           </small>
-
+          <button
+            className="btn btn-warning edit-comment-button"
+            onClick={() => handleEditComment(comment._id, comment.content)}
+          >
+            Edit
+          </button>
           <button
             className="btn btn-danger delete-comment-button"
             onClick={() => deleteComment(comment._id)}
@@ -195,3 +250,4 @@ const Comments = ({ postId }) => {
 };
 
 export default Comments;
+
