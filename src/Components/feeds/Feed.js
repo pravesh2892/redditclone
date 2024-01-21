@@ -7,7 +7,7 @@ import { MyContext } from "../../Utils/MyContext";
 import { Link, useNavigate } from "react-router-dom";
 import Comments from "../Comment/Comment";
 
-const Feed = ({ fed, removePost }) => {
+const Feed = ({ fed, removePost}) => {
   const [likeColor, setLikeColor] = useState("#0F1A1C");
   const [dislikeColor, setDislikeColor] = useState("#0F1A1C");
   const { login, userName } = useContext(MyContext);
@@ -31,7 +31,7 @@ const Feed = ({ fed, removePost }) => {
     navigator.clipboard
       .writeText(postLink)
       .then(() => {
-        toast.success("Link copied to clipboard", {
+        toast.success("Coming soon!", {
           position: toast.POSITION.TOP_CENTER,
           progress: undefined,
           hideProgressBar: false,
@@ -40,7 +40,7 @@ const Feed = ({ fed, removePost }) => {
       })
       .catch((err) => {
         console.error("Failed to copy: ", err);
-        toast.error("Failed to copy link to clipboard", {
+        toast.error("Coming soom!", {
           position: toast.POSITION.TOP_CENTER,
           progress: undefined,
           hideProgressBar: false,
@@ -55,7 +55,7 @@ const Feed = ({ fed, removePost }) => {
       navigate("/signin");
       return;
     }
-    toast.success("Post saved successful", {
+    toast.success("Coming soon!", {
       position: toast.POSITION.TOP_CENTER,
       progress: undefined,
       hideProgressBar: false,
@@ -100,6 +100,7 @@ const Feed = ({ fed, removePost }) => {
             hideProgressBar: false,
             theme: "light",
           });
+         
           removePost(fed._id);
         } else {
           return response.json().then((errorData) => {
@@ -224,8 +225,8 @@ const Feed = ({ fed, removePost }) => {
   };
   return (
     <div className="feed" key={fed?._id}>
-      <div className="top-content">
-        <div className="vote-like" >
+    <div className="left">
+    <div className="vote-like" >
           <div className="action-item like-btn" onClick={handleLike} style={{ color: likeColor }} >
             <svg
               rpl=""
@@ -254,6 +255,10 @@ const Feed = ({ fed, removePost }) => {
             </svg>
           </div>
         </div>
+    </div>
+   <div className="right">
+      <div className="top-content">
+       
         <div className="user">
           {fed?.author?.profileImage ? (
             <img src={fed?.author?.profileImage} alt="" />
@@ -334,6 +339,7 @@ const Feed = ({ fed, removePost }) => {
       </div>
       <div ref={commentBoxRef}>
         {openComment && <Comments fed={fed} postId={fed?._id}  />}
+      </div>
       </div>
       <ToastContainer
         position="bottom-center"

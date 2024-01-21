@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./feeds.css";
 import Feed from "./Feed";
 import Stick from "../../Pages/Popular/Stick";
@@ -33,6 +33,17 @@ const Feeds = () => {
 
   const removePost = (postId) => {
     const updatedPosts = posts.filter((post) => post._id !== postId);
+    setPosts(updatedPosts);
+    setFilteredPosts(updatedPosts);
+  };
+
+  const updateCommentCount = (postId, newCommentCount) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) =>
+        post._id === postId ? { ...post, commentCount: newCommentCount } : post
+      )
+    );
+
     setPosts(updatedPosts);
     setFilteredPosts(updatedPosts);
   };
@@ -73,7 +84,12 @@ const Feeds = () => {
       )}
       <div className="feeds">
         {filteredPosts.map((fed) => (
-          <Feed fed={fed} key={fed._id} removePost={removePost} />
+          <Feed
+            fed={fed}
+            key={fed._id}
+            removePost={removePost}
+           
+          />
         ))}
       </div>
     </div>
@@ -81,4 +97,5 @@ const Feeds = () => {
 };
 
 export default Feeds;
+
 
