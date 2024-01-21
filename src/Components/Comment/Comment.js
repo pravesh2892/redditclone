@@ -8,7 +8,7 @@ import { ImArrowDown, ImArrowUp } from "react-icons/im";
 import { BsSave } from "react-icons/bs";
 import { MyContext } from "../../Utils/MyContext";
 
-const Comments = ({ postId }) => {
+const Comments = ({ postId}) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState();
   const {
@@ -98,6 +98,7 @@ const Comments = ({ postId }) => {
         toast.success(responseData.message, {
           position: toast.POSITION.TOP_CENTER,
         });
+       
       } else {
         const errorRes = await response.json();
         toast.error(errorRes.message, {

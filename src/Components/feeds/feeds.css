@@ -45,6 +45,7 @@
     margin: 5px 0;
     margin-left: 28px;
     cursor: pointer;
+    position: relative;
   }
   .feed .bottom-content .action-item:hover {
     color:  #6c63ff;
@@ -179,3 +180,27 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9998;
 }
+
+
+.delete-message {
+  position: absolute;
+  top: -50px;
+  right: -8px;
+  background-color: white;
+  border: 1px solid rgb(116, 7, 7);
+  color: red;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: fadeInOut 0.3s ease-in-out;
+  z-index: 999;
+}
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+

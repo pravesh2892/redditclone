@@ -15,6 +15,7 @@ const Feed = ({ fed, removePost }) => {
   const [likeCount, setLikeCount] = useState(fed?.likeCount);
   const [liked, setLiked] = useState(fed?.isLiked || false);
   const [disliked, setDisliked] = useState(fed?.isDisliked || false);
+  const [showDeleteMessage, setShowDeleteMessage] = useState(false);
   const navigate = useNavigate();
   const commentBoxRef = useRef(null);
   const token = localStorage.getItem("jwt");
@@ -62,6 +63,7 @@ const Feed = ({ fed, removePost }) => {
     });
   };
 
+  
   const handleDeletePost = (e) => {
     e.stopPropagation();
     if (!login) {
@@ -69,6 +71,20 @@ const Feed = ({ fed, removePost }) => {
       return;
     }
 
+    const isPostCreator = userName === fed?.author?.name;
+
+    if (!isPostCreator) {
+      setShowDeleteMessage(true);
+
+      // Hide the message after a delay (e.g., 3 seconds)
+      setTimeout(() => {
+        setShowDeleteMessage(false);
+      }, 3000);
+
+      return;
+    }
+
+    // If the current user is the post creator, proceed with the delete operation
     fetch(`https://academics.newtonschool.co/api/v1/reddit/post/${fed?._id}`, {
       method: "DELETE",
       headers: {
@@ -123,6 +139,8 @@ const Feed = ({ fed, removePost }) => {
 
     setOpenComment(!openComment);
   };
+
+ 
 
   const handleLike = (e) => {
     e.stopPropagation();
@@ -249,11 +267,7 @@ const Feed = ({ fed, removePost }) => {
           <div>
             <h4 style={{ paddingTop: "7px" }}>r/{fed?.author?.name}</h4>
           </div>
-          {fed?.author?.name === userName && (
-            <div className="delete-btn" onClick={handleDeletePost}>
-              <BsTrash />
-            </div>
-          )}
+       
         </div>
       </div>
       <div className="mid-content">
@@ -304,9 +318,22 @@ const Feed = ({ fed, removePost }) => {
             <BsSave /> Save
           </span>
         </div>
+        <div className="action-item save-btn" style={{ position: 'relative' }}>
+          <span onClick={handleDeletePost}
+           style={{ paddingTop: "5px", paddingLeft: "5px" }}
+          >
+           <BsTrash />Delete
+          </span>
+         
+        </div>
+        {showDeleteMessage && (
+          <div className="delete-message">
+            Only the post creator can delete the post
+          </div>
+        )}
       </div>
       <div ref={commentBoxRef}>
-        {openComment && <Comments fed={fed} postId={fed?._id} />}
+        {openComment && <Comments fed={fed} postId={fed?._id}  />}
       </div>
       <ToastContainer
         position="bottom-center"
