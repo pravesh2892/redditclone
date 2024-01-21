@@ -1,28 +1,12 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import "./Comment.css";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { MdDeleteForever } from "react-icons/md";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ImArrowDown, ImArrowUp } from "react-icons/im";
-import { BsSave } from "react-icons/bs";
 import { MyContext } from "../../Utils/MyContext";
 
-const Comments = ({ postId}) => {
+const Comments = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState();
-  const {
-    login,
-    setLogin,
-    setShowForm,
-    theme,
-    userName,
-    setTheme,
-    setNavMenu,
-    userId,
-    setUserId,
-  } = useContext(MyContext);
- 
+  const { userName } = useContext(MyContext);
 
   var key = "content";
 
@@ -31,7 +15,7 @@ const Comments = ({ postId}) => {
   obj[key] = commentText;
 
   useEffect(() => {
-    const token =localStorage.getItem("jwt");
+    const token = localStorage.getItem("jwt");
     const fetchComments = async () => {
       try {
         const response = await fetch(
@@ -46,11 +30,11 @@ const Comments = ({ postId}) => {
           }
         );
         const res = await response.json();
-        
+        console.log("comment data", res);
         if (res.status === "success") {
-          const commentsWithTime = res.data.map(comment => ({
+          const commentsWithTime = res.data.map((comment) => ({
             ...comment,
-            time: comment.createdAt 
+            time: comment.createdAt,
           }));
           setComments(commentsWithTime);
         }
@@ -68,37 +52,36 @@ const Comments = ({ postId}) => {
       myHeaders.append("projectID", "f104bi07c490");
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("Authorization", "Bearer " + token);
-  
+
       const raw = JSON.stringify({
         content: commentText,
       });
-  
+
       const requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: raw,
         redirect: "follow",
       };
-  
+
       const response = await fetch(
         `https://academics.newtonschool.co/api/v1/reddit/comment/${postId}`,
         requestOptions
       );
-  
+
       if (response.ok) {
         const responseData = await response.json();
         const newComment = {
           id: responseData.data.id,
-          userName: userName, 
+          userName: userName,
           content: commentText,
           time: responseData.data.createdAt,
         };
-        setComments([...comments, newComment]); 
-        setCommentText(""); 
+        setComments([...comments, newComment]);
+        setCommentText("");
         toast.success(responseData.message, {
           position: toast.POSITION.TOP_CENTER,
         });
-       
       } else {
         const errorRes = await response.json();
         toast.error(errorRes.message, {
@@ -112,10 +95,41 @@ const Comments = ({ postId}) => {
       });
     }
   };
+
+  const deleteComment = async (commentId) => {
+    try {
+      const token = localStorage.getItem("jwt");
+      const response = await fetch(
+        `https://academics.newtonschool.co/api/v1/reddit/comment/${commentId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            projectID: "f104bi07c480",
+          },
+        }
+      );
   
-
-
-
+      if (response.ok) {
+       
+        toast.success("Comment deleted successfully", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      } else {
+        const errorRes = await response.json();
+        toast.error(errorRes.message, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting comment: ", error);
+      toast.error("Failed to delete comment", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
+  
+  
   return (
     <div className="comments" key={postId}>
       <div className="writebox">
@@ -128,7 +142,7 @@ const Comments = ({ postId}) => {
             />
             <input
               type="text"
-              style={{backgroundColor:"white"}}
+              style={{ backgroundColor: "white" }}
               placeholder="Write a comment"
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
@@ -136,7 +150,6 @@ const Comments = ({ postId}) => {
             <button
               type="submit"
               className="btn btn-primary comment-button"
-            
               onClick={(e) => {
                 e.preventDefault();
                 commentSend();
@@ -148,7 +161,7 @@ const Comments = ({ postId}) => {
         </form>
       </div>
       {comments.map((comment) => (
-        <div className="user-comment user" key={comment.id}>
+        <div className="user-comment user" key={comment._id}>
           <img
             style={{ width: "5%", height: "5%" }}
             src="https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png"
@@ -158,12 +171,19 @@ const Comments = ({ postId}) => {
             <h5>{comment.userName}</h5>
             <p>{comment.content}</p>
           </div>
-          <small>{new Date(comment.time).toLocaleTimeString([], {
-            hour: "numeric",
-            minute: "2-digit",
-          })}</small>
-        
-         
+          <small>
+            {new Date(comment.time).toLocaleTimeString([], {
+              hour: "numeric",
+              minute: "2-digit",
+            })}
+          </small>
+
+          <button
+            className="btn btn-danger delete-comment-button"
+            onClick={() => deleteComment(comment._id)}
+          >
+            Delete
+          </button>
         </div>
       ))}
     </div>
