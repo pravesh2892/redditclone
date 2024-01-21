@@ -1,47 +1,82 @@
 .comments {
-    width: 100%;
-    background: rgb(245, 245, 245)0e6;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin: 1rem 0;
-  }
-  .comments .writebox {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .comments .writebox input {
-    width: 78%;
-    background: transparent;
-    border: 1px solid #343536;;
-    padding: 10px;
-    border-radius: 0.5rem;
-    color: #0c0c0c;
-  }
-  .user-comment{
-    background-color:#dae0e6 ;
-    padding: 2px 0;
-  }
+  width: 100%;
+  background: rgb(245, 245, 245)0e6;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0;
+}
 
-  .user-comment .delete{
-    display: flex;
-    float: right;
-  }
+.comments .writebox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 
-  .comment-button {
-    background-color: orangered;
-    color: white;
-    border-radius: 12px;
-    border: transparent;
-    height: 32px;
-    width: 64px;
-    transition: background-color 0.3s ease; 
-  }
-  
-  .comment-button:hover {
-    background-color: orange; 
-    cursor: pointer; 
-  }
-  
+.comments .writebox input {
+  width: 78%;
+  background: transparent;
+  border: 1px solid #343536;
+  padding: 10px;
+  border-radius: 0.5rem;
+  color: #0c0c0c;
+}
+
+.user-comment {
+  background-color: #dae0e6;
+  padding: 2px 0;
+  position: relative; /* Added position: relative; */
+}
+
+.comment-button {
+  background-color: orangered;
+  color: white;
+  border-radius: 12px;
+  border: transparent;
+  height: 32px;
+  width: 64px;
+  transition: background-color 0.3s ease;
+}
+
+.comment-button:hover {
+  background-color: orange;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute; /* Changed to absolute */
+  right: 20px; /* Align to the right side */
+  top: 11px; /* Align to the top */
+ 
+}
+
+.dropdown-content {
+  display: none;
+  right: 18px;
+  top: -8px;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  border-radius: 4px;
+  overflow: auto;
+}
+
+.dropdown-content button {
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.dropdown-content button:hover {
+  background-color: #f1f1f1;
+}
+
+.user-comment:hover .dropdown-content {
+  display: block;
+}

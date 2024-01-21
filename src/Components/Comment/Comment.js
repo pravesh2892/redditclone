@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Comment.css";
 import { toast } from "react-toastify";
 import { MyContext } from "../../Utils/MyContext";
+import { HiDotsHorizontal } from "react-icons/hi";
+import { HiDotsVertical } from "react-icons/hi";
 
 const Comments = ({ postId }) => {
   const [comments, setComments] = useState([]);
@@ -9,6 +11,7 @@ const Comments = ({ postId }) => {
   const [deletedCommentId, setDeletedCommentId] = useState(null);
   const [editCommentId, setEditCommentId] = useState(null);
   const [editedCommentText, setEditedCommentText] = useState("");
+  const [dropdownCommentId, setDropdownCommentId] = useState(null);
   const { userName } = useContext(MyContext);
 
   useEffect(() => {
@@ -110,12 +113,14 @@ const Comments = ({ postId }) => {
           },
         }
       );
-
+  
       if (response.ok) {
         toast.success("Comment deleted successfully", {
           position: toast.POSITION.TOP_CENTER,
         });
-
+  
+        // Set deletedCommentId before setting it to null
+        setDeletedCommentId(commentId);
         // Reset deletedCommentId after successful deletion
         setDeletedCommentId(null);
       } else {
@@ -131,6 +136,7 @@ const Comments = ({ postId }) => {
       });
     }
   };
+  
 
   const editComment = async (commentId, updatedComment) => {
     try {
@@ -196,6 +202,10 @@ const Comments = ({ postId }) => {
     setEditedCommentText("");
   };
 
+  const handleDropdownToggle = (commentId) => {
+    setDropdownCommentId(commentId === dropdownCommentId ? null : commentId);
+  };
+
   return (
     <div className="comments" key={postId}>
       <div className="writebox">
@@ -248,12 +258,7 @@ const Comments = ({ postId }) => {
                 >
                   Save
                 </button>
-                <button
-                  className="btn btn-secondary cancel-edit-button"
-                  onClick={cancelEditComment}
-                >
-                  Cancel
-                </button>
+               
               </>
             ) : (
               <p>{comment.content}</p>
@@ -265,20 +270,25 @@ const Comments = ({ postId }) => {
               minute: "2-digit",
             })}
           </small>
-          {!editCommentId && (
-            <button
-              className="btn btn-warning edit-comment-button"
-              onClick={() => handleEditComment(comment._id, comment.content)}
-            >
-              Edit
-            </button>
-          )}
-          <button
-            className="btn btn-danger delete-comment-button"
-            onClick={() => deleteComment(comment._id)}
-          >
-            Delete
-          </button>
+          <div className="dropdown">
+            <HiDotsVertical onClick={() => handleDropdownToggle(comment._id)} />
+            {dropdownCommentId === comment._id && (
+              <div className="dropdown-content">
+                <button
+                  className="btn btn-warning edit-comment-button"
+                  onClick={() => handleEditComment(comment._id, comment.content)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="btn btn-danger delete-comment-button"
+                  onClick={() => deleteComment(comment._id)}
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       ))}
     </div>

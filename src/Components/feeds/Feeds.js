@@ -4,7 +4,7 @@ import Feed from "./Feed";
 import Stick from "../../Pages/Popular/Stick";
 import { MyContext } from "../../Utils/MyContext";
 
-const Feeds = () => {
+const Feeds = ({ showStick = true }) => {
   const { login } = useContext(MyContext);
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -74,7 +74,8 @@ const Feeds = () => {
 
   return (
     <div>
-      {login && (
+     
+      {showStick && login && (
         <Stick
           filterHot={() => filterPosts("Hot")}
           filterNew={() => filterPosts("New")}
@@ -82,6 +83,7 @@ const Feeds = () => {
           showAll={showAllPosts}
         />
       )}
+     
       <div className="feeds">
         {filteredPosts.map((fed) => (
           <Feed
