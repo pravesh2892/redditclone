@@ -53,27 +53,28 @@ const Comments = ({ postId }) => {
       myHeaders.append("projectID", "f104bi07c490");
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("Authorization", "Bearer " + token);
-
+  
       const raw = JSON.stringify({
         content: commentText,
       });
-
+  
       const requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: raw,
         redirect: "follow",
       };
-
+  
       const response = await fetch(
         `https://academics.newtonschool.co/api/v1/reddit/comment/${postId}`,
         requestOptions
       );
-
+  
       if (response.ok) {
         const responseData = await response.json();
+        const newCommentId = responseData.data.id; // Capture the new comment ID
         const newComment = {
-          id: responseData.data.id,
+          id: newCommentId,
           userName: userName,
           content: commentText,
           time: responseData.data.createdAt,
@@ -83,6 +84,9 @@ const Comments = ({ postId }) => {
         toast.success(responseData.message, {
           position: toast.POSITION.TOP_CENTER,
         });
+  
+        // Set deletedCommentId using the new comment ID
+        setDeletedCommentId(newCommentId);
       } else {
         const errorRes = await response.json();
         toast.error(errorRes.message, {
@@ -96,7 +100,7 @@ const Comments = ({ postId }) => {
       });
     }
   };
-
+  
   const deleteComment = async (commentId) => {
     try {
       const token = localStorage.getItem("jwt");
