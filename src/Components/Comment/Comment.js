@@ -7,6 +7,8 @@ const Comments = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const [deletedCommentId, setDeletedCommentId] = useState(null);
+  const [editCommentId, setEditCommentId] = useState(null);
+  const [editedCommentText, setEditedCommentText] = useState("");
   const { userName } = useContext(MyContext);
 
   useEffect(() => {
@@ -108,12 +110,12 @@ const Comments = ({ postId }) => {
           },
         }
       );
-  
+
       if (response.ok) {
         toast.success("Comment deleted successfully", {
           position: toast.POSITION.TOP_CENTER,
         });
-  
+
         // Reset deletedCommentId after successful deletion
         setDeletedCommentId(null);
       } else {
@@ -177,11 +179,21 @@ const Comments = ({ postId }) => {
   };
 
   const handleEditComment = (commentId, currentContent) => {
-    const updatedComment = prompt("Edit your comment:", currentContent);
+    setEditCommentId(commentId);
+    setEditedCommentText(currentContent);
+  };
 
-    if (updatedComment !== null) {
-      editComment(commentId, updatedComment);
+  const saveEditedComment = () => {
+    if (editedCommentText.trim() !== "") {
+      editComment(editCommentId, editedCommentText);
+      setEditCommentId(null);
+      setEditedCommentText("");
     }
+  };
+
+  const cancelEditComment = () => {
+    setEditCommentId(null);
+    setEditedCommentText("");
   };
 
   return (
@@ -223,7 +235,29 @@ const Comments = ({ postId }) => {
           />
           <div>
             <h5>{comment.userName}</h5>
-            <p>{comment.content}</p>
+            {editCommentId === comment._id ? (
+              <>
+                <input
+                  type="text"
+                  value={editedCommentText}
+                  onChange={(e) => setEditedCommentText(e.target.value)}
+                />
+                <button
+                  className="btn btn-success save-edit-button"
+                  onClick={saveEditedComment}
+                >
+                  Save
+                </button>
+                <button
+                  className="btn btn-secondary cancel-edit-button"
+                  onClick={cancelEditComment}
+                >
+                  Cancel
+                </button>
+              </>
+            ) : (
+              <p>{comment.content}</p>
+            )}
           </div>
           <small>
             {new Date(comment.time).toLocaleTimeString([], {
@@ -231,12 +265,14 @@ const Comments = ({ postId }) => {
               minute: "2-digit",
             })}
           </small>
-          <button
-            className="btn btn-warning edit-comment-button"
-            onClick={() => handleEditComment(comment._id, comment.content)}
-          >
-            Edit
-          </button>
+          {!editCommentId && (
+            <button
+              className="btn btn-warning edit-comment-button"
+              onClick={() => handleEditComment(comment._id, comment.content)}
+            >
+              Edit
+            </button>
+          )}
           <button
             className="btn btn-danger delete-comment-button"
             onClick={() => deleteComment(comment._id)}
@@ -250,4 +286,5 @@ const Comments = ({ postId }) => {
 };
 
 export default Comments;
+
 
