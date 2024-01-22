@@ -37,16 +37,7 @@ const Feeds = ({ showStick = true }) => {
     setFilteredPosts(updatedPosts);
   };
 
-  const updateCommentCount = (postId, newCommentCount) => {
-    setPosts((prevPosts) =>
-      prevPosts.map((post) =>
-        post._id === postId ? { ...post, commentCount: newCommentCount } : post
-      )
-    );
-
-    setPosts(updatedPosts);
-    setFilteredPosts(updatedPosts);
-  };
+ 
 
   const shuffleArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
