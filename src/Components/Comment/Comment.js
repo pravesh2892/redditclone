@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Comment.css";
 import { toast } from "react-toastify";
 import { MyContext } from "../../Utils/MyContext";
-import { HiDotsHorizontal } from "react-icons/hi";
 import { HiDotsVertical } from "react-icons/hi";
 
 const Comments = ({ postId }) => {
@@ -296,5 +295,4 @@ const Comments = ({ postId }) => {
 };
 
 export default Comments;
-
 
