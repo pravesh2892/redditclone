@@ -1,50 +1,52 @@
 .reddit_clone-nav_menu_item {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    font-family: "Montserrat", sans-serif;
-    background-color: #ffffff;
-    color: #0F1A1C;
-    z-index: 100;
-    position: fixed;
-    height: 100vh;
-    overflow: auto;
-    border: 1px solid #00000033;
-    border-top: none;
-    padding-bottom: 1rem;
-    padding-top: 20px;
-    margin-top: 50px;
-    padding-left: 15px;
-  }
-  
-  .reddit_clone-nav_menu_item button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    text-align: start;
-    padding: 0.5rem 1rem;
-    gap: 0.5rem;
-    font-size: 1.1rem;
-    border: none;
-    background-color: #ffffff;
-    font-family: "Signika Negative", sans-serif;
-    color: #0F1A1C;
-    padding-top: 7px;
-    padding-bottom: 9px;
-  }
-  .reddit_clone-nav_menu_item button:hover {
-    background-color: rgba(218, 224, 230, 0.5);
-    cursor: pointer;
-  }
-  .reddit_clone-nav_menu p {
-    padding-left: 1rem;
-    font-size: 0.8rem;
-    margin: 0.5rem 0;
-    font-family: "Signika Negative", sans-serif;
-    color: var(--color-text);
-  }
-  .react_clone-nav_menu_icons {
-    font-size: 1.5rem;
-    margin: 0 0.5rem;
-    color:#0F1A1C;
-  }
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", sans-serif;
+  background-color: #ffffff;
+  color: #0F1A1C;
+  z-index: 100;
+  position: fixed;
+  height: 100vh;
+  overflow: auto;
+  border: 1px solid #00000033;
+  border-top: none;
+  padding-bottom: 1rem;
+  padding-top: 20px;
+  padding-left: 15px;
+  top: 50px; /* Adjust the top position as needed */
+}
+
+.reddit_clone-nav_menu_item button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: start;
+  padding: 0.5rem 1rem;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  border: none;
+  background-color: #ffffff;
+  font-family: "Signika Negative", sans-serif;
+  color: #0F1A1C;
+  padding-top: 7px;
+  padding-bottom: 9px;
+}
+
+.reddit_clone-nav_menu_item button:hover {
+  background-color: rgba(218, 224, 230, 0.5);
+  cursor: pointer;
+}
+
+.reddit_clone-nav_menu_item p {
+  padding-left: 1rem;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+  font-family: "Signika Negative", sans-serif;
+  color: var(--color-text);
+}
+
+.reddit_clone-nav_menu_icons {
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+  color: #0F1A1C;
+}

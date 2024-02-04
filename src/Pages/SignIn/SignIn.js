@@ -17,6 +17,8 @@ const SignIn = () => {
     setUserId,
     message,
     setMessage,
+    userEmail, 
+    setUserEmail,
   } = useContext(MyContext);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -64,7 +66,7 @@ const SignIn = () => {
           password: "",
         });
         let json = await data.json();
-       
+      //  console.log("login data", json);
 
         if (json.status === "fail") {
           setError(json.message); 
@@ -75,7 +77,10 @@ const SignIn = () => {
           setError("");
           localStorage.setItem("jwt", json.token);
           const userName = json.data.name;
+          const userIde = json.data.email;
+          console.log(userIde)
           setUserName(userName);
+          setUserEmail(userIde);
           setLogin(true);
           const userPhotoUrl =
             "https://reddit-clone-jishnu.vercel.app/static/media/User%20Logo%20Half.7fa3e6a6376757ebe020.png";

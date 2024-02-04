@@ -12,6 +12,7 @@ import {
 import { FaRegCircleUser } from "react-icons/fa6";
 import { MdOutlineCancel } from "react-icons/md";
 import { CiCircleMore, CiCoinInsert } from "react-icons/ci";
+import { CgProfile } from "react-icons/cg";
 import { FaReddit } from "react-icons/fa";
 import { FcAdvertising } from "react-icons/fc";
 import { FiFileText } from "react-icons/fi";
@@ -22,6 +23,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../Utils/MyContext";
 import { arr } from "../NavMenuArray";
 import "./Navbar.css";
+import LiveChat from "../chat/LiveChat";
 
 const style = {
   border: "1px solid #343536",
@@ -43,6 +45,9 @@ const Option = () => {
     <div className="reddit_clone-nav_option">
       <button className="no-hover-effect" style={{textDecoration:"none", cursor:"auto", color:"#878A8C"}}>
       <FaRegCircleUser /> My Stuff  
+      </button>
+      <button onClick={() => navigate("/UserProfile")}>
+      <CgProfile className="reddit_clone-nav_menu_icons"/>Profile
       </button>
       <button
         onClick={() => {
@@ -84,6 +89,7 @@ const Option = () => {
 const NavIcon = ({ userName, option, setOption }) => {
   const navigate = useNavigate();
   const optionRef = useRef();
+ 
   const { setNavMenu } = useContext(MyContext);
 
   const { userPhoto, setNewPost } = useContext(MyContext);
@@ -101,17 +107,20 @@ const NavIcon = ({ userName, option, setOption }) => {
   const handleOptions = () => {
     setOption((p) => !p);
   };
+
+  
   return (
     <div className="reddit_clone-nav_icons">
       <div className="reddit_clone-nav_icons_item">
         <button
-          onClick={() => {
-            navigate("/message");
-            setNavMenu(arr[4]);
-          }}
+         onClick={()=>{
+          navigate("/livechat");
+          setNavMenu(arr[4]);
+         }}
         >
           <AiOutlineMessage />
         </button>
+      
         <button
           onClick={() => {
             navigate("/createpost");

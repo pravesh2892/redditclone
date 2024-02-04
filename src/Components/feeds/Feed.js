@@ -33,7 +33,7 @@ const Feed = ({ fed, removePost }) => {
       .writeText(postLink)
       .then(() => {
         toast.success("Coming soon!", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.BOTTOM_CENTER,
           progress: undefined,
           hideProgressBar: false,
           theme: "light",
@@ -42,7 +42,7 @@ const Feed = ({ fed, removePost }) => {
       .catch((err) => {
         console.error("Failed to copy: ", err);
         toast.error("Coming soom!", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.BOTTOM_CENTER,
           progress: undefined,
           hideProgressBar: false,
           theme: "light",
@@ -57,7 +57,7 @@ const Feed = ({ fed, removePost }) => {
       return;
     }
     toast.success("Coming soon!", {
-      position: toast.POSITION.TOP_CENTER,
+      position: toast.POSITION.BOTTOM_CENTER,
       progress: undefined,
       hideProgressBar: false,
       theme: "light",
@@ -105,6 +105,7 @@ const Feed = ({ fed, removePost }) => {
             progress: undefined,
             hideProgressBar: false,
             theme: "light",
+            
           });
 
           removePost(fed._id);
@@ -298,8 +299,9 @@ const Feed = ({ fed, removePost }) => {
           </div>
         </div>
         <div className="mid-content">
-          <p>{fed?.content}</p>
+          
           <img src={fed?.channel?.image} alt="" />
+          <p>{fed?.content}</p>
         </div>
         <div className="bottom-content">
           <div className="action-item comment-btn" onClick={commentHandler}>
@@ -386,7 +388,8 @@ const Feed = ({ fed, removePost }) => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme="dark"
+        style={{ boxShadow: "none !important" }}
       />
     </div>
   );

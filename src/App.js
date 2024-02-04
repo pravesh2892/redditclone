@@ -15,6 +15,8 @@ import Message from './Pages/Message/Message';
 import CreatePost from './Components/CreatePost/CreatePost';
 import SearchPage from './Pages/SearchResult/SearchPage';
 import Popular from './Pages/Popular/Popular';
+import LiveChat from './Components/chat/LiveChat';
+import UserProfile from './Components/userProfile/UserProfile';
 
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
     <Route path='/createpost' element={<CreatePost />} />
     <Route path='/search' element={<SearchPage />} />
     <Route path='/popular' element={<Popular />} />
+    <Route path ='/livechat' element={<LiveChat />} />
+    <Route path ='/UserProfile' element={<UserProfile />} />
    </Routes>
    </Router>
  

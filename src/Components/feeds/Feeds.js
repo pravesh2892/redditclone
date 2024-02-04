@@ -63,6 +63,7 @@ const Feeds = ({ showStick = true }) => {
     setFilteredPosts(filtered);
   };
 
+  const filteredPostsByUser = posts.filter((post) => post.author === userName);
   return (
     <div>
      

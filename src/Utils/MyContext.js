@@ -37,6 +37,7 @@ const MyProvider = ({ children }) => {
   );
   const [postItem, setPostItem] = useState({});
   const [id, setId] = useState(0);
+  const [userEmail, setUserEmail] = useState();
   const [userPhoto, setUserPhoto] = useState();
   const [loading, setLoading] = useState(false);
   const [theme, setTheme] = useState("light-theme");
@@ -123,6 +124,8 @@ const MyProvider = ({ children }) => {
         setEmail,
         message,
         setMessage,
+        userEmail, 
+        setUserEmail,
       }}
     >
       {children}

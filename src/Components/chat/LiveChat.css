@@ -1,0 +1,129 @@
+/* General container styles */
+.main-container {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    width: 60%;
+    margin-left: 300px;
+    height: 70vh;
+    margin-top: 183px;
+    z-index: 100000;
+}
+
+/* Left section styles */
+.flex-left {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    align-items: center;
+    width: 166px;
+    gap: 1rem;
+    border-right: 1px solid black;
+    overflow: hidden;
+}
+
+.flex-left img {
+    border-radius: 50%;
+    width: 30%;
+}
+
+/* Modal container styles */
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow: hidden;
+}
+
+/* Top section styles */
+.top-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: auto;
+    border-radius: 8px;
+    padding: 16px;
+    position: relative;
+}
+
+.top-section img {
+    object-fit: cover;
+}
+
+/* Chat typing field styles */
+.chat-typing-field {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    position: absolute;
+    bottom: 0;
+    width: 35%;
+}
+
+.chat-typing-field input {
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 75%;
+}
+
+.chat-typing-field button {
+    margin-left: 10px;
+    padding: 8px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Utility classes */
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-gray-400 {
+    color: #a0aec0;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col-reverse {
+    flex-direction: column-reverse;
+}
+
+.gap-2 {
+    gap: 0.5rem;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.h-10 {
+    height: 2.5rem;
+}
+
+.w-10 {
+    width: 2.5rem;
+}
+
+.rounded-full {
+    border-radius: 50%;
+}
+
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+.h {
+    height: 20rem;
+}
+
+.pl-12 {
+    padding-left: 3rem;
+}

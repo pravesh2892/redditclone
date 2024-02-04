@@ -268,3 +268,8 @@
   border-radius: 5px;
   text-align: center;
 }
+
+.custom-toast-container {
+  box-shadow: none !important;
+  border: none !important;
+}
